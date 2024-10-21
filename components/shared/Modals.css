@@ -1,0 +1,75 @@
+.modal-container {
+  /*Styles of a centered container */
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 3;
+}
+.modal-content {
+  /*Styles of the modal content */
+  position: relative;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  box-sizing: border-box;
+  background-color: #4caf50;
+  color: white;
+}
+.error {
+  /*Background color of an error message*/
+  background-color: #f44336;
+}
+.success {
+  background-color: #4caf50;
+}
+.modal-content button {
+  /*Styles of the button */
+  width: 25%;
+  height: 30px;
+  border-radius: 4px;
+  border: none;
+  background-color: white;
+  color: #4caf50;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* Animation for when the modal appears*/
+.modal-content {
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+.modal-container {
+  animation-name: modalblurr;
+  animation-duration: 1s;
+}
+@keyframes modalopen {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+@keyframes modalblurr {
+  /*Make the background become rgba(0,0,0,.5)*/
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+}

@@ -7,18 +7,53 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+.main-navbar {
+  position: fixed;
+  height: 45px;
+  background-color: rgb(2, 26, 80);
+  width: 100%;
+  color: rgb(150, 150, 2);
+  padding: 5px 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+}
+.logo {
+  border-radius: 3px;
+  padding: 3px 9px;
+  background-color: rgb(150, 150, 2);
+  color: rgb(2, 26, 80);
+  font-weight: 900;
+  font-size: 1.3em;
+}
+.platform {
+  font-weight: 600;
+  width: 60%;
+}
+.wrapper {
+  flex: 1 1 auto;
+  position: relative;
+  height: 95vh;
+  padding: 2rem;
+  overflow: auto;
+}
+
 
 @layer utilities {
   .text-balance {
