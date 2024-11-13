@@ -1,8 +1,77 @@
 import React from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
-const page = () => {
+import { Button } from '@/components/ui/button'
+import { handleGetUsers } from '@/actions/userActions'
+
+//Types:
+import { User } from '@/index'
+import UserDialog from '@/components/admin/UserDialog'
+
+//internacionalizacion
+import { getTranslations } from 'next-intl/server'
+
+
+const page = async () => {
+  const t = await getTranslations('AdminPage');
+
+  const usersList = await handleGetUsers() as User[];
   return (
-    <div>Admin !</div>
+    <>
+      <header>
+        
+        <p>
+          {t('info')}
+        </p>
+        
+      </header>
+      <section className='my-10'>
+        <h1 className='font-semibold text-2xl'>
+        {t('listTitle')}
+        </h1>
+        <ul className='flex flex-col gap-5 my-5'>
+          {
+            usersList.map((user) => {
+              return (
+                <li className="flex justify-between items-center " key={user.userId}>
+                  <Card className='w-full flex items-center justify-between'>
+                    <CardHeader>
+                      <CardTitle>{user.name}</CardTitle>
+                      <CardDescription>{user.email}</CardDescription>
+                      <p className='text-gray-500'>
+                        Roles: 
+                        {user.roles.map((role) => {
+                          return (
+                            <span key={role}>
+                              {' '}{`${role}`}
+                            </span>
+                          )
+                        })}
+                      </p>
+                      <p>
+                        {t('countryLabel')}: {user.country.countryName}
+                      </p>
+                    </CardHeader>
+                    <CardContent className='flex gap-5'>
+                    <UserDialog usage='edit' user={user} />
+                    <UserDialog usage='delete' user={null} />
+                    </CardContent>
+                  </Card>
+                </li>
+              )
+            })
+          }
+
+       
+        
+         
+        </ul>
+      </section>
+
+
+        
+    </>
+    
   )
 }
 

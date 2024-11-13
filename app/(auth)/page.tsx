@@ -1,34 +1,44 @@
 import FormAuth from '@/components/login/FormAuth'
 import React from 'react'
-import Link from 'next/link'
+// import Link from 'next/link'
+import {Card, CardContent} from '@/components/ui/card';
+
+//internacionalizacion
+import {useTranslations} from 'next-intl';
+import Link from 'next/link';
 
 const page = () => {
+  const t = useTranslations('LoginPage');
   return (
-    <div>
-    <h1 className="font-bold text-5xl italic">AnReHis</h1>
+    <div className="my-20">
+    <h1 className="font-bold text-center text-5xl italic">AnReHis</h1>
     <article
-      className="max-w-md mx-auto my-10 p-6 bg-white rounded-lg shadow-md form-container">
-      <h2 className="text-2xl font-bold mb-6 text-center">
-        Bienvenido de nuevo! Por favor, ingresa tus credenciales.
-      </h2>
-
-        <FormAuth />
+      className="max-w-md mx-auto my-10 ">
+        <Card className='p-6 shadow-lg'>
+          <h2 className="text-2xl font-bold mb-6 text-center">
+            {t('title')}
+          </h2>
+          <CardContent>
+          <FormAuth />
         
-        <p>
+        <p className='my-2'>
             <Link
                 href="mailto:gabo2023brazil@gmail.com"
-                className="text-blue-500 hover:underline"
+                className="text-accent hover:underline"
             >
-                ¿No tienes una cuenta? Habla con nosotros para crear una 
+                {t('noAccount')}
             </Link>
         </p>
+          </CardContent>
+        </Card>
+
+
+     
+
+        
       
     </article>
-    <div id="app-info" className="p-6">
-      <p>
-        Una plataforma que facilita el analisis de datos historicos de una plataforma academica.
-      </p>
-    </div>
+    
   </div>
   )
 }
