@@ -1,4 +1,5 @@
 import React from 'react'
+import LogoutButton from './LogoutButton'
 
 type SidebarProps = {
     role: 'admin' | 'staff' | 'coordinador'
@@ -7,8 +8,8 @@ type SidebarProps = {
 
 const Sidebar = ({role}: SidebarProps) => {
   return (
-    <div className="hidden lg:block h-screen w-64 shadow-md shadow-dark-black/50 ">
-      <aside className=" h-[92vh] fixed flex flex-col justify-between items-center pt-16 pl-10">
+    <div className="hidden lg:block  w-64 shadow-md shadow-dark-black/50 ">
+      <aside className=" h-screen fixed flex flex-col justify-between items-center pt-16 pl-10">
         {role === "admin" ? (
           <>
             <ul className="space-y-6">
@@ -143,14 +144,7 @@ const Sidebar = ({role}: SidebarProps) => {
             
           </div>
         )}
-{/* 
-        <button
-          className="cursor-pointer border border-primary-blue px-7 py-3 rounded-sm
-                "
-          onClick={logout}
-        >
-          Log out
-        </button> */}
+        <LogoutButton  position='sidebar'/>
       </aside>
     </div>
   )

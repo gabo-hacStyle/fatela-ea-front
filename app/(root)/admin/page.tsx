@@ -10,12 +10,17 @@ import UserDialog from '@/components/admin/UserDialog'
 
 //internacionalizacion
 import { getTranslations } from 'next-intl/server'
+import { getCookie } from '@/utils/cookiesManager'
+import { getCountries } from '@/services/backend/catalogs'
 
 
 const page = async () => {
   const t = await getTranslations('AdminPage');
 
+  const token = await getCookie('token') as string;
+  const countries = await getCountries(token);
   const usersList = await handleGetUsers() as User[];
+
   return (
     <>
       <header>
@@ -23,6 +28,8 @@ const page = async () => {
         <p>
           {t('info')}
         </p>
+
+        <UserDialog usage='add' countries={countries} user={null}/>
         
       </header>
       <section className='my-10'>
@@ -53,8 +60,8 @@ const page = async () => {
                       </p>
                     </CardHeader>
                     <CardContent className='flex gap-5'>
-                    <UserDialog usage='edit' user={user} />
-                    <UserDialog usage='delete' user={null} />
+                    <UserDialog usage='edit'   countries={countries} user={user} />
+                    <UserDialog usage='delete' countries={countries} user={user} />
                     </CardContent>
                   </Card>
                 </li>

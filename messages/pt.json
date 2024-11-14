@@ -1,0 +1,70 @@
+{
+  "NavBar": {
+    
+    "hero": "PLATAFOMA DE REGISTROS ACADEMICOS"
+  },
+  "FormSection": {
+      "emailLabel": "Email",
+      "passwrodLabel": "Senha",
+      "rolesLabel": "Papéis",
+      "nameLabel": "Nome",
+      "countryLabel": "País",
+      "enabledLabel": "Habilitado",
+      "submit": "Enviar"
+    },
+    "LoginPage": {
+      "title": "Bem-vindo de volta! Por favor, insira suas credenciais.",
+      "emailLabel": "E-mail registrado no sistema",
+      "passwrodLabel": "Senha",
+      "loginButton": "Entrar",
+      "noAccount": "Não tem uma conta? Fale conosco para criar uma"
+    },
+    "AdminPage": {
+      "title": "Página de administrador",
+      "info": "Nesta página você tem acesso à administração de acesso à plataforma. Você pode visualizar os usuários existentes, criar usuários para visualizar os relatórios atribuindo papéis específicos a cada usuário, editar e excluir.",
+      "listTitle": "Lista de usuários registrados na plataforma:",
+      "btnNewuser": "Novo usuário",
+      "logout": "Sair",
+      "linkAnalisys": "Página de análise",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "rolesLabel": "Roles",
+     
+      "admin": "Administrador",
+      "coor": "Coordenador",
+      "staff": "Funcionário",
+      
+      "countryLabel": "País",
+     
+      "newUsertitle": "Adicionar um usuário para acessar a plataforma",
+      "tab1": "Usuário",
+      "tab2": "Usuário administrador",
+      "adminWarn": "Este usuário terá acesso à administração da plataforma",
+      "name": "Nome",
+      "email": "Email",
+      "password": "Senha",
+      "country": "País",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "editUserTitle": "Editando o usuário com o email:",
+      "deleteWarn": "Você tem certeza que deseja excluir o usuário com o email:"
+    },
+    "staffPage": {
+      "header": "Acesso de funcionário",
+      "filtersTitle": "Seção de filtros",
+      "select": "Filtrar por ",
+
+      "programs": "programas",
+      "courses": "cursos",
+      "students": "estudantes",
+
+      "page": "Página",
+      "studentsTotal": "Total de estudantes",
+      "coursesTotal": "Total de cursos",
+      "genderPieTitle": "Distribuição de gênero de estudantes", 
+      "timeTextDefault": "Período: ",
+      "timeDefault": "histórico",
+      "labelMen": "Homens",
+      "labelWomen": "Mulheres"
+    }
+}

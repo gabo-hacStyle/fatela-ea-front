@@ -1,4 +1,4 @@
-import Sidebar from '@/components/shared/Sidebar'
+// import Sidebar from '@/components/shared/Sidebar'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import LogoutButton from '@/components/shared/LogoutButton'
@@ -19,7 +19,7 @@ const layout = ({children}: Readonly<{children: React.ReactNode}>) => {
 
                 <div className='flex gap-10 items-center'>
 
-                  <UserDialog usage='add' user={null}/>
+              
               
                   <div className='flex flex-col gap-3'>
                     <Link

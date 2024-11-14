@@ -39,7 +39,7 @@ export default async function LocaleLayout({
     notFound();
   }
   const messages = await getMessages();
-  console.log('Locale en el layout de la app', locale);
+  // console.log('Locale en el layout de la app', locale);
   return (
     <html lang={locale}>
       <body

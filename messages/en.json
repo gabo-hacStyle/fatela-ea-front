@@ -1,0 +1,70 @@
+{
+  "NavBar": {
+    
+    "hero": "ACADEMIC REGISTRATION PLATFORM"
+  },
+    "LoginPage": {
+      "title": "Welcome back! Please enter your credentials.",
+      "emailLabel": "Email registered in the system",
+      "passwrodLabel": "Password",
+      "loginButton": "Login",
+      "noAccount": "Don't have an account? Talk to us to create one"
+    },
+    "FormSection": {
+      "emailLabel": "Email",
+      "passwrodLabel": "Password",
+      "rolesLabel"  : "Roles",
+      "nameLabel"   : "Name",
+      "countryLabel": "Country",
+      "enabledLabel": "Enabled",
+      "submit": "Submit"
+    },
+    "AdminPage": {
+      "title": "Admin Page",
+      "info": "On this page, you have access to the platform's administration. You can view existing users, create users to view reports by assigning specific roles to each user, edit, and delete.",
+      "listTitle": "List of users registered on the platform:",
+      "btnNewuser": "New User",
+      "logout": "Log out",
+      "linkAnalisys": "Analysis Page",
+      "edit": "Edit",
+      "delete": "Delete",
+      "rolesLabel": "Roles",
+     
+      "admin": "Administrator",
+      "coor": "Coordinator",
+      "staff": "Staff",
+      "countryLabel": "Country",
+      
+      "newUsertitle": "Add a user to access the platform",
+      "tab1": "User",
+      "tab2": "Admin User",
+      "adminWarn": "This user will have access to the platform administration",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "country": "Country",
+      "save": "Continue",
+      "cancel": "Cancel",
+      
+      "editUserTitle": "Editing the user with the email:",
+      "deleteWarn": "Are you sure you want to delete the user with the email:"
+    },
+    "staffPage": {
+      "header": "Staff Access",
+      "filtersTitle": "Filters Section",
+      "select": "Filter by",
+
+      "programs": "programs",
+      "courses": "courses",
+      "students": "students",
+
+      "page": "Page",
+      "studentsTotal": "Total Students",
+      "coursesTotal": "Total Courses",
+      "genderPieTitle": "Student Gender Distribution",
+      "timeTextDefault": "Period: ",
+      "timeDefault": "historical",
+      "labelMen": "Men",
+      "labelWomen": "Women"
+    }
+}
