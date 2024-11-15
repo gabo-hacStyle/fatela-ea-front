@@ -1,6 +1,4 @@
-'use client';
-import React, {useState} from 'react'
-
+import React, { useEffect, useState } from 'react'
 import {
     Select,
     SelectContent,
@@ -8,98 +6,71 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-//   import {
-//     Pagination,
-//     PaginationContent,
-//     PaginationEllipsis,
-//     PaginationItem,
-//     PaginationLink,
-//     PaginationNext,
-//     PaginationPrevious,
-//   } from "@/components/ui/pagination"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-  import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-  } from "@/components/ui/popover"
-import { Button } from '@/components/ui/button';
+import { handleGetCountries, handleGetPrograms } from '@/actions/catalogsActions';
+import { Country, Program } from '@/index';
 
-//Tipos 
-import { Course, CourseList, Program, Student } from '@/index'
 
-//i18n
-import { useTranslations } from 'next-intl';
-
-  
-interface SelectItemsProps {
-    programs: Program[] | null;
-    courses: CourseList[] | null;
-    students: Student[][] | null;
-    type: 'courses' | 'programs' | 'students';
+interface Props {
+    type: 'program' | 'year' | 'country' ;
+    field: any;
+ 
 }
 
+const SelectItems =  ({field, type}: Props) => {
+    const [data, setData] = useState<any[]>([])
+    useEffect(() => {
+        const fetchData = async () => {
+            switch (type) {
+                case 'program':
+                    const programs = await handleGetPrograms();
+                    if(programs) {
+                        setData(programs)
+                    }
+                    break;
+                case 'year':
+                    
+                    const years = Array.from({ length: 2024 - 1990 + 1 }, (_, i) => 1990 + i);
+                    setData(years);
+                    break;
+                case 'country':
+                    const countries = await handleGetCountries();
+                    if(countries) {
+                        setData(countries)
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        fetchData()
+    }, [])
 
-const SelectItems = ({programs, courses, students, type}: SelectItemsProps) => {
-    const t = useTranslations('staffPage');
 
-
-    const [selectedTab, setSelectedTab] = useState(0);
-
-    const handleTabChange = (index: number) => {
-        setSelectedTab(index);
-      };
-    
     const renderSelectItems = () => {
-        if (type === 'programs' && programs) {
-          return programs.map((program, index) => (
+        if (type === 'program' ) {
+          return data.map((program: Program, index: number) => (
             <SelectItem key={index} value={program.programCode}>
               {program.name}
             </SelectItem>
           ));
-        } else if (type === 'courses' && courses) {
-          return courses[selectedTab].map((course, index) => (
-            <SelectItem key={index} value={course}>
-              {course}
+        } else if (type === 'year' ) {
+          return data.map((year: number,) => (
+            <SelectItem key={year} value={String(year)}>
+              {year}
             </SelectItem>
           ));
-        } else if (type === 'students' && students) {
-          return students[selectedTab].map((student, index) => (
-            <SelectItem key={index} value={student.studentCode}>
-              {student.studentName}
+        } else if (type === 'country' ) {
+          return data.map((country: Country, index: number) => (
+            <SelectItem key={index} value={String(country.countryId)}>
+              {country.countryName}
             </SelectItem>
           ));
         }
         return null;
       };
-    
-      const renderTabs = () => {
-        const dataLength = type === 'courses' ? courses?.length : students?.length;
-        return Array.from({ length: dataLength || 0 }, (_, index) => (
-          <TabsTrigger key={index} value={index.toString()} onClick={() => handleTabChange(index)}>
-            {`${t('page')} ${index + 1}`}
-          </TabsTrigger>
-        ));
-      };
 
   return (
-    <>
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button variant={'outline'}>{t('select')} {
-              type === 'programs' ? t('programs') :
-              type === 'courses' ? t('courses') :
-              t('students')
-            
-            }</Button>
-        </PopoverTrigger>
-        <PopoverContent>
-          <Tabs defaultValue="0">
-            <TabsList>
-              {renderTabs()}
-            </TabsList>
-            <TabsContent value={selectedTab.toString()}>
-              <Select>
+    <Select defaultValue={field.value} onValueChange={field.onChange}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder={`Select ${type}`} />
                 </SelectTrigger>
@@ -107,11 +78,6 @@ const SelectItems = ({programs, courses, students, type}: SelectItemsProps) => {
                   {renderSelectItems()}
                 </SelectContent>
               </Select>
-            </TabsContent>
-          </Tabs>
-        </PopoverContent>
-      </Popover>
-    </>
   )
 }
 

@@ -11,6 +11,16 @@ export const defaultValuesUserForm = {
     roles:undefined,
 }
 
+export const defaultValuesFilters = {
+    program: undefined,
+    year: undefined,
+    country: undefined,
+    student: undefined,
+    approved: undefined,
+    course: undefined,
+    gender: undefined,
+}
+
 export const roles = [
     {
         value: 'STAFF',
@@ -37,3 +47,4 @@ export const rolesEdit =[
         label: 'admin'
     }
 ]
+
