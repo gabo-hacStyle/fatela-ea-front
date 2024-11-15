@@ -14,10 +14,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { getInitialInfo } from '@/services/backend/notas'
+// import { getInitialInfo } from '@/services/backend/notas'
 import InfoCards from '@/components/analysis/InfoCards'
 import { PieFull } from '@/components/analysis/charts/PieFull'
 import { getTranslations } from 'next-intl/server'
+import { HorizontalBars } from '@/components/analysis/charts/HorizontalBars'
 
 
 const page = async () => {
@@ -33,7 +34,7 @@ const page = async () => {
       getStudents(token? token : ''),
     ]);
 
-    const initialInfo = await getInitialInfo(token? token : '');
+    // const initialInfo = await getInitialInfo(token? token : '');
     const halfIndexCourses = Math.ceil(courses.length /4);
     const quarterIndexStudents = Math.ceil(students.length / 4);
 
@@ -83,7 +84,7 @@ const page = async () => {
             <CardTitle>{t('studentsTotal')}</CardTitle>
           </CardHeader>
           <CardContent>
-            <InfoCards type={'students'} data={initialInfo.totalStudents}/>
+            <InfoCards type={'students'} />
           </CardContent>
         </Card>
 
@@ -92,15 +93,19 @@ const page = async () => {
             <CardTitle>{t('coursesTotal')}</CardTitle>
           </CardHeader>
           <CardContent>
-            <InfoCards type={'courses'} data={initialInfo.totalCourses}/>
+            <InfoCards type={'courses'} />
           </CardContent>
-        </Card>
+        </Card> 
 
         
 
       </section>
       <section className='grid grid-cols-2 gap-5'>
-      <PieFull type={'genders'} data={initialInfo}/>
+      <PieFull type={'genders'} />
+      <HorizontalBars />
+      <div className='h-28'></div>
+      <div className='h-28'></div>
+      <div className='h-28'></div>
       </section>
 
     </section>

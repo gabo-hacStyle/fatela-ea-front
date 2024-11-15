@@ -10,7 +10,8 @@
       "nameLabel": "Nombre",
       "countryLabel": "País",
       "enabledLabel": "Habilitado",
-      "submit": "Enviar"
+      "submit": "Enviar",
+       "rolesEmpty": "Selecciona un rol por lo menos"
     },
 
     "LoginPage": {
@@ -19,6 +20,7 @@
       "passwrodLabel": "Contraseña",
       "loginButton": "Ingresar",
       "noAccount": "¿No tienes una cuenta? Habla con nosotros para crear una"
+     
     },
     "AdminPage": {
       "title": "Pagina de administrador ",
@@ -48,6 +50,7 @@
         "save": "Guardar",
         "cancel": "Cancelar"
       ,
+      
       "editUserTitle": "Editando al usuario con el email:",
       "deleteWarn": "¿Estas seguro que deseas eliminar al usuario con el email:"
     }, 

@@ -6,6 +6,7 @@ import { createAdmin, createUser, deleteUser, getUsers, updateUser } from '@/ser
 import { getCookie } from '@/utils/cookiesManager';
 import { redirect } from 'next/navigation'
 
+import { revalidateTag } from 'next/cache';
 //Token cookie
 const bringToken = async () => {
     const token = await getCookie('token');
@@ -47,6 +48,7 @@ export const handleCreateUser = async (body: CreateUserType) => {
        const token = await bringToken();
        if(token) {
         const response = await createUser(body, token);
+        revalidateTag('a');
         return response;
        } else {
         
@@ -66,6 +68,7 @@ export const handleCreateAdmin = async (body: CreateAdminType) => {
        const token = await bringToken();
        if(token) {
         const response = await createAdmin(body, token);
+        revalidateTag('a')
         return response;
        } else {
         
@@ -79,11 +82,11 @@ export const handleCreateAdmin = async (body: CreateAdminType) => {
 
 //Update
 export const handleUpdateUser = async (body: UpdateUserType) => {
-    console.log('Llego al handleUpdateUser');
-    try {
+    console.log('Llego al handleUpdateUser');try {
         const token = await bringToken();
         if(token) {
             const response = await updateUser(body, token);
+            revalidateTag('a');
             return response;
         } else {
             redirect('/login');
@@ -100,6 +103,7 @@ export const handleDeleteUser = async (userId: number) => {
         const token = await bringToken();
         if(token) {
             const response = await deleteUser(userId, token);
+            revalidateTag('a');
             return response;
         } else {
             redirect('/login');

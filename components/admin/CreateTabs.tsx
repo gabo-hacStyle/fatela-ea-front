@@ -13,7 +13,6 @@ interface Props {
 
 const CreateTabs = ({user, countries}: Props) => {
     const t = useTranslations('AdminPage');
-    console.log('countries antes del formulaeio', countries)
   return (
     <>
         <Tabs defaultValue="normalUser" className="w-[400px]">

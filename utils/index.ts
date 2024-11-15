@@ -3,12 +3,12 @@ export const  defaultValuesAuthForm = {
     password: ""
 }
 export const defaultValuesUserForm = {
-    email: "",
-    password: "",
-    name: "",
-    enabled: true,
-    countryId: '0',
-    roles: []
+    email:undefined,
+    password:undefined,
+    name:undefined,
+    enabled:true,
+    countryId:undefined,
+    roles:undefined,
 }
 
 export const roles = [

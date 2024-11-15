@@ -52,8 +52,11 @@ export const getUsers = async (token:string) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            }
-        });
+            },
+             next: {
+                tags: ['a']
+            }}
+        );
         const data = await response.json();
         return data;
         

@@ -16,10 +16,11 @@ import {getLocale} from 'next-intl/server';
 export const handleLoginUser = async (data: LoginBody) => {
     const response = await postLogin(data);
     // const locale = await getLocale();
+   
     
 
     if(response.authenticated){
-        console.log('Token en el action', response.token);
+        
         const user = await getUserByid(response.email, response.token);
         
         //Guardamos el token en una cookie

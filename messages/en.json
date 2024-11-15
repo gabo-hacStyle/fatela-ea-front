@@ -45,6 +45,7 @@
       "country": "Country",
       "save": "Continue",
       "cancel": "Cancel",
+      "rolesEmpty": "Select at least one role",
       
       "editUserTitle": "Editing the user with the email:",
       "deleteWarn": "Are you sure you want to delete the user with the email:"

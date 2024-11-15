@@ -125,7 +125,7 @@ const UserDialog = ({usage, user, countries}: UserDialogProps) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
-            <AlertDialogAction onClick={() => clickDeleteHandler()}>{t('save')}</AlertDialogAction>
+            <AlertDialogAction onClick={() => clickDeleteHandler()}>{t('delete')}</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

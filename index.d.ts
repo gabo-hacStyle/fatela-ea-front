@@ -97,9 +97,15 @@ export type NotesByCountry = {
     grades: Note[];
 }
 
-export type InitialInfo = {
+export type StudentsCountByConutry = {
+    count: number;
+    country: string;
+}
+
+export type QuantityInfo = {
     totalStudents: number;
     totalCourses: number;
     totalFemales: number;
     totalMales: number;
+    studentsByCountry: StudentsCountByConutry[]
 }

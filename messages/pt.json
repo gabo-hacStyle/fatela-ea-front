@@ -47,7 +47,9 @@
       "save": "Salvar",
       "cancel": "Cancelar",
       "editUserTitle": "Editando o usuário com o email:",
-      "deleteWarn": "Você tem certeza que deseja excluir o usuário com o email:"
+      "deleteWarn": "Você tem certeza que deseja excluir o usuário com o email:",
+
+      "rolesEmpty": "Selecione pelo menos um papel"
     },
     "staffPage": {
       "header": "Acesso de funcionário",

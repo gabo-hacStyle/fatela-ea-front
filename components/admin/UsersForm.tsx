@@ -45,21 +45,45 @@ import {
 } from "@/actions/userActions";
 import { Country, User } from "@/index";
 
-const userSchema = z.object({
+const userSchemaBase = z.object({
   // username: z.string({ required_error: "El campo 'Nombre' no puede estar vacío." }),
   // user_name: z.string({ required_error: "El campo 'email' no puede estar vacío." }),
-  email: z.string().email({
+  email: z.string({
+    required_error: "El campo 'email' no puede estar vacío.",
+  }).email({
     message: "El campo 'email' debe ser un correo electrónico válido.",
   }),
-  password: z
-    .string()
-    .min(6, "La contraseña debe tener al menos 6 caracteres.")
-    ,
-  name: z.string(),
+  name: z.string({
+    required_error: "Se te olvido el nombre",
+  }),
   enabled: z.boolean(),
-  countryId: z.string(),
-  roles: z.array(z.string()),
+  countryId: z.string(
+    {required_error: "Selecciona el pais." },
+  ),
+  
 });
+
+const adminSchemaAdd = userSchemaBase.extend({
+  password: z.string({
+    required_error: "El campo 'contraseña' no puede estar vacío.",
+  }).min(6, "La contraseña debe tener al menos 6 caracteres."),
+  roles: z.string().array().optional(),
+});
+
+const userSchemaAdd = userSchemaBase.extend({
+  password: z.string({
+    required_error: "El campo 'contraseña' no puede estar vacío.",
+  }).min(6, "La contraseña debe tener al menos 6 caracteres."),
+  roles: z.array(z.string())
+
+});
+
+const userSchemaEdit = userSchemaBase.extend({
+  password: z.string().optional(),
+  roles: z.string().array()
+});
+
+
 
 interface UsersFormProps {
   usage: "add" | "addAdmin" | "edit";
@@ -67,6 +91,9 @@ interface UsersFormProps {
   countries: Country[];
 }
 const UsersForm = ({ usage, user, countries }: UsersFormProps) => {
+
+  const [isRolesEmpty, setIsRolesEmpty] = useState(true);
+
   const t = useTranslations("FormSection");
   const u = useTranslations("AdminPage");
 
@@ -83,6 +110,9 @@ const userId = usage === "edit" ? user?.userId : 0;
         }
       : defaultValuesUserForm;
 
+  //Schema depending on the usage
+  const userSchema = usage === 'edit' ? userSchemaEdit : usage === 'addAdmin' ? adminSchemaAdd :  userSchemaAdd;
+
   //Defining the form
   const form = useForm<z.infer<typeof userSchema>>({
     resolver: zodResolver(userSchema),
@@ -92,6 +122,7 @@ const userId = usage === "edit" ? user?.userId : 0;
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [created, setCreated] = useState(false);
+  console.log('Roles: ', form.getValues('roles'))
 
   //Submit function
   async function onSubmit(data: z.infer<typeof userSchema>) {
@@ -103,8 +134,8 @@ const userId = usage === "edit" ? user?.userId : 0;
         name,
         enabled,
         countryId: Number(countryId),
-        roles,
-        password,
+        roles: roles || ['USER'],
+        password: password ? password : "",
     }
     const backendValuesEdit = {
         userId: user?.userId || 0,
@@ -113,7 +144,7 @@ const userId = usage === "edit" ? user?.userId : 0;
             name,
             enabled,
             countryId: Number(countryId),
-            roles,
+            roles: roles || ['USER'],
         }
     }
     const backendvaluesCreateAdmin = {
@@ -121,8 +152,10 @@ const userId = usage === "edit" ? user?.userId : 0;
         name,
         enabled,
         countryId: Number(countryId),
-        password,
+        password: password ? password : "",
     }
+
+    console.log(backendValuesAdd)
    
     setDisabled(true);
     setLoading(true);
@@ -236,7 +269,20 @@ const userId = usage === "edit" ? user?.userId : 0;
               <FormField
                 control={form.control}
                 name="roles"
-                render={({ field }) => (
+                render={({ field }) => {
+
+                  if(field.value !== undefined){
+                    if(field.value.length === 0){
+                      setIsRolesEmpty(true)
+                    }else{
+                    setIsRolesEmpty(false)
+                    }
+                    
+                  }
+                  
+
+                  return (
+                  
                   <>
                     {roles.map((item) => (
                       <FormItem key={item.value} className="w-full mt-6 flex items-center gap-3">
@@ -245,10 +291,7 @@ const userId = usage === "edit" ? user?.userId : 0;
                             checked={field.value?.includes(item.value)}
                             onCheckedChange={(checked) => {
                               return checked
-                                ? field.onChange([
-                                    ...(field.value || []),
-                                    item.value,
-                                  ])
+                                ? field.onChange([...(field.value || []), item.value])
                                 : field.onChange(
                                     field.value?.filter(
                                       (value) => value !== item.value,
@@ -266,8 +309,17 @@ const userId = usage === "edit" ? user?.userId : 0;
                         </FormLabel>
                       </FormItem>
                     ))}
-                  </>
-                )}
+                    {
+                      isRolesEmpty && <>
+                      
+                      <p className="text-red-500">
+                        {t("rolesEmpty")}
+
+                      </p>
+                      </>
+                    }
+                  </>)
+                }}
               />
             </div>
             </>
@@ -300,19 +352,29 @@ const userId = usage === "edit" ? user?.userId : 0;
               <FormField
                 control={form.control}
                 name="roles"
-                render={({ field }) => (
+                render={({ field }) => {
+
+                  if(field.value !== undefined){
+                    if(field.value.length === 0){
+                      setIsRolesEmpty(true)
+                    }else{
+                    setIsRolesEmpty(false)
+                    }
+                    
+                  }
+                  
+
+                  return (
+                  
                   <>
                     {rolesEdit.map((item) => (
-                      <FormItem key={item.value} className="w-full flex items-center gap-3">
+                      <FormItem key={item.value} className="w-full mt-6 flex items-center gap-3">
                         <FormControl>
                           <Checkbox
                             checked={field.value?.includes(item.value)}
                             onCheckedChange={(checked) => {
                               return checked
-                                ? field.onChange([
-                                    ...(field.value || []),
-                                    `${item.value}`,
-                                  ])
+                                ? field.onChange([...(field.value || []), item.value])
                                 : field.onChange(
                                     field.value?.filter(
                                       (value) => value !== item.value,
@@ -330,8 +392,17 @@ const userId = usage === "edit" ? user?.userId : 0;
                         </FormLabel>
                       </FormItem>
                     ))}
-                  </>
-                )}
+                    {
+                      isRolesEmpty && <>
+                      
+                      <p className="text-red-500">
+                        {t("rolesEmpty")}
+
+                      </p>
+                      </>
+                    }
+                  </>)
+                }}
               />
             </div>
           )}
