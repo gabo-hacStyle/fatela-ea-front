@@ -43,7 +43,11 @@ const filtersFormSchema = z.object({
     gender: z.string().optional(),
 });
 
-const FiltersForm = () => {
+
+interface Props {
+    view:   'staff' | 'coord';
+}
+const FiltersForm = ({view}: Props) => {
     const { setQuery, setYearSelected } = useUpdateInfo();
     // const t = useTranslations('staffPage');
 
@@ -65,7 +69,7 @@ const FiltersForm = () => {
       
           // Construir la query de tipo URL
           const queryParams = new URLSearchParams(filteredData as [string, string][]).toString();
-          const queryUrl = `?${queryParams}`;
+          const queryUrl = `${queryParams}`;
       
           console.log(queryUrl);
 
@@ -86,7 +90,7 @@ const FiltersForm = () => {
             </Button>
             <form action="" onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
-                <FormField
+                        <FormField
                             control={form.control}
                             name='program'
                             render={({ field }) => (
@@ -103,23 +107,29 @@ const FiltersForm = () => {
                                 </FormItem>
                             )}
                         />
-                    <FormField
-                            control={form.control}
-                            name='countryId'
-                            render={({ field }) => (
-                                <FormItem className="w-full mt-6" >
-                                    <FormLabel>
-                                        Pais
 
-                                    </FormLabel>
-                                    <FormControl>
-                                        
-                                        <SelectItems field={field} type='country'/>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                        {
+                            view === 'staff' ? (
+                            <FormField
+                                control={form.control}
+                                name='countryId'
+                                render={({ field }) => (
+                                    <FormItem className="w-full mt-6" >
+                                        <FormLabel>
+                                            Pais
+
+                                        </FormLabel>
+                                        <FormControl>
+                                            
+                                            <SelectItems field={field} type='country'/>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            ): null
+                        }
+                    
                     {/* <FormField
                             control={form.control}
                             name='course'

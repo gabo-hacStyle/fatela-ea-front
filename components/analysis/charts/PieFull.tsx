@@ -34,7 +34,7 @@ interface Props {
 
 export function PieFull({ type }: Props) {
   const t = useTranslations('staffPage');
-  const { query, yearSelected } = useUpdateInfo();
+  const { query, yearSelected, mode, countryId } = useUpdateInfo();
   const [data, setData] = useState<any>(null);
   const [periodo, setPeriodo] = useState<number>();
 
@@ -44,10 +44,10 @@ export function PieFull({ type }: Props) {
   }
 
   useEffect(() => {
-    console.log('Sera que esta seleccionado un año?', yearSelected.selected)
-    console.log('Este es el año seleccionado', yearSelected.year)
+    // console.log('Sera que esta seleccionado un año?', yearSelected.selected)
+    // console.log('Este es el año seleccionado', yearSelected.year)
     const responseData = async () => {
-      const response = await handleGetQuantityInfo(query);
+      const response = await handleGetQuantityInfo(query, mode, countryId);
       if(response) {
         if(yearSelected.selected){
           setPeriodo(yearSelected.year);
@@ -56,7 +56,10 @@ export function PieFull({ type }: Props) {
       }
       
     };
-    responseData();
+    setTimeout(() => {
+      responseData();
+    }, 300)
+    // responseData();
   }, [query]);
 
 

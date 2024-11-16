@@ -22,11 +22,11 @@ const BASE_GRADES = `${BASE_URL}/grades`;
 //     }
 // }
 
-export const getQuantityInfo = async(token: string, query: string | null) => {
+export const getQuantityInfo = async(token: string, query: string ) => {
     try {
-        const queryReal = query ? query : '';
-        // console.log('query', queryReal);
-        const response = await fetch(`${BASE_GRADES}/infoQuantities${queryReal}`, {
+        // const queryReal = query ? query : '';
+        // console.log('query para cantidades', query);
+        const response = await fetch(`${BASE_GRADES}/infoQuantities${query}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,10 +41,11 @@ export const getQuantityInfo = async(token: string, query: string | null) => {
     }
 }
 
-export const getFilteredNotes = async(token: string, query: string | null) => {
+export const getFilteredNotes = async(token: string, query: string) => {
     try {
-        const queryReal = query ? query : '';
-        const response = await fetch(`${BASE_GRADES}/filteredBy${queryReal}`, {
+        // const queryReal = query ? query : '';
+        // console.log('query para filteredNotes', query);
+        const response = await fetch(`${BASE_GRADES}/filteredBy${query}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

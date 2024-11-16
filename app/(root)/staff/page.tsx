@@ -37,8 +37,9 @@ import { PieFull } from "@/components/analysis/charts/PieFull";
 import { getTranslations } from "next-intl/server";
 import { HorizontalBars } from "@/components/analysis/charts/HorizontalBars";
 import { handleGetCountries, handleGetPrograms, handleGetCourses, handleGetStudents } from "@/actions/catalogsActions";
-import { handleGetGradesFiltered, handleGetQuantityInfo } from "@/actions/gradesActions";
+import {  handleGetQuantityInfo } from "@/actions/gradesActions";
 import TableContent from "@/components/analysis/TableContent";
+import ClientStateSetter from "@/components/hidden/ClientStateSetter";
 
 
 const page = async () => {
@@ -48,7 +49,7 @@ const page = async () => {
   // await handleGetStudents();
   await handleGetPrograms();
   await handleGetCountries();
-  await handleGetQuantityInfo(null);
+  await handleGetQuantityInfo(null, 'staff', null);
   // await handleGetGradesFiltered(null);
 
 
@@ -56,11 +57,12 @@ const page = async () => {
   
   return (
     <div>
-      <header>
+      {/* <header>
         <p className="text-2xl font-semibold">{t("header")}</p>
       </header>
 
-      <LogoutButton position="sidebar" />
+      <LogoutButton position="sidebar" /> */}
+      <ClientStateSetter  mode="staff" countryId={null}/>
 
 
       <section
@@ -69,7 +71,7 @@ const page = async () => {
       >
         <h2 className="text-xl">{t("filtersTitle")}</h2>
 
-        <FiltersForm />
+        <FiltersForm view="staff" />
       </section>
 
       <section className="grid gap-5" id="analysis">

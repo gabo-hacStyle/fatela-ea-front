@@ -37,7 +37,7 @@ export const handleLoginUser = async (data: LoginBody) => {
             
             const country = await user.country.countryName;
 
-            redirect(`/coordinator/${country}`);
+            redirect(`/coordinator`);
         }
         
         

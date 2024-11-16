@@ -13,7 +13,7 @@ import { Note, PagesInfo } from '@/index';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const TableContent = () => {
-    const {query} = useUpdateInfo();
+    const {query, mode, countryId} = useUpdateInfo();
     const [queryPage, setQueryPage] = useState(0);
     const [data, setData] = useState<Note[]>();
     const [pagesInfo, setPagesInfo] = useState<PagesInfo>();
@@ -36,7 +36,7 @@ const TableContent = () => {
             } else {
                 setQueryNull(false);
                 setLoading(true);
-                const response = await handleGetGradesFiltered(`${query}${querypageReal}`);
+                const response = await handleGetGradesFiltered(`${query}${querypageReal}`,mode, countryId );
                 if(response) {
                     setData(response.content);
                     setPagesInfo(response.page);
@@ -47,7 +47,7 @@ const TableContent = () => {
             
         };
         responseData();
-    }, [query,  queryPage]);
+    }, [query,  queryPage, mode, countryId]);
 
 
     const handleTabChange = (index: number) => {
@@ -72,7 +72,7 @@ const TableContent = () => {
                 <TableRow key={index}>
                     <TableCell>{item.studentName}</TableCell>
                     <TableCell className="bg-accent/50">{item.grade}</TableCell>
-                    <TableCell>{item.approved}</TableCell>
+                    <TableCell>{item.approved === 'S'? 'Si aprovo': 'No aprovo'}</TableCell>
                     <TableCell>{item.courseCode}</TableCell>
                     <TableCell>{item.status}</TableCell>
                     <TableCell>{item.year}</TableCell>

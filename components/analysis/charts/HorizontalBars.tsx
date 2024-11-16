@@ -29,13 +29,13 @@ import { handleGetQuantityInfo } from '@/actions/gradesActions';
 
 export function HorizontalBars() {
   const t = useTranslations('staffPage');
-  const { query, yearSelected } = useUpdateInfo();
+  const { query, yearSelected, mode, countryId } = useUpdateInfo();
   const [data, setData] = useState<any>(null);
   const [periodo, setPeriodo] = useState<number>();
 
   useEffect(() => {
     const responseData = async () => {
-      const response = await handleGetQuantityInfo(query);
+      const response = await handleGetQuantityInfo(query, mode, countryId);
       if(response){
         if(yearSelected.selected){
           setPeriodo(yearSelected.year);
@@ -47,7 +47,7 @@ export function HorizontalBars() {
       
     };
     responseData();
-  }, [query]);
+  }, [query, mode, countryId]);
 
   const chartConfig = {
     males: {
