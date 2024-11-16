@@ -20,8 +20,40 @@ import {create} from 'zustand';
 type UpdateInfoType = {
     query: string;
     setQuery: (query: string) => void;
+    coursesInProgram: {
+        active: boolean;
+        total: number;
+    };
+    setCoursesInProgram: (coursesInProgram: {
+        active: boolean;
+        total: number;
+    }) => void;
+    yearSelected: {
+        selected: boolean;
+        year: number;
+    };
+    setYearSelected: (yearSelected: {
+        selected: boolean;
+        year: number;
+    }) => void;
 }
 export const useUpdateInfo = create<UpdateInfoType>((set) => ({
     query: '',
     setQuery: (query: string) => set({query}),
+    coursesInProgram: {
+        active: false,
+        total: 0,
+    },
+    setCoursesInProgram: (coursesInProgram: {
+        active: boolean;
+        total: number;
+    }) => set({coursesInProgram}),
+    yearSelected: {
+        selected: false,
+        year: 0,
+    },
+    setYearSelected: (yearSelected: {
+        selected: boolean;
+        year: number;
+    }) => set({yearSelected}),
 }));

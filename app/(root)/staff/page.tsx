@@ -18,6 +18,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
 import FiltersForm from "@/components/analysis/filters/FiltersForm";
 
 // import { getInitialInfo } from '@/services/backend/notas'
@@ -26,17 +37,19 @@ import { PieFull } from "@/components/analysis/charts/PieFull";
 import { getTranslations } from "next-intl/server";
 import { HorizontalBars } from "@/components/analysis/charts/HorizontalBars";
 import { handleGetCountries, handleGetPrograms, handleGetCourses, handleGetStudents } from "@/actions/catalogsActions";
-import { handleGetQuantityInfo } from "@/actions/gradesActions";
+import { handleGetGradesFiltered, handleGetQuantityInfo } from "@/actions/gradesActions";
+import TableContent from "@/components/analysis/TableContent";
 
 
 const page = async () => {
   //para internacionalizacion
   const t = await getTranslations("staffPage");
-  await handleGetCourses();
-  await handleGetStudents();
+  // await handleGetCourses();
+  // await handleGetStudents();
   await handleGetPrograms();
   await handleGetCountries();
   await handleGetQuantityInfo(null);
+  // await handleGetGradesFiltered(null);
 
 
   
@@ -55,38 +68,6 @@ const page = async () => {
         className=" border-secondary border-2 rounded-lg p-6 mx-auto my-9"
       >
         <h2 className="text-xl">{t("filtersTitle")}</h2>
-
-        FiltersForm
-
-        {/* <div className="grid grid-cols-2 gap-4"> */}
-          {/* <div className="col-span-2">
-            <div className="grid md:grid-cols-2 gap-4"> */}
-              {/* <SelectItemsPaginated
-                programs={programs}
-                courses={null}
-                students={null}
-                type="programs"
-              />
-              <SelectItemsPaginated
-                programs={null}
-                courses={[coursesFirstHalf, coursesSecondHalf]}
-                students={null}
-                type="courses"
-              />
-              <SelectItemsPaginated
-                programs={null}
-                courses={null}
-                students={[
-                  studentsFirstQuarter,
-                  studentsSecondQuarter,
-                  studentsThirdQuarter,
-                  studentsFourthQuarter,
-                ]}
-                type="students"
-              /> */}
-            {/* </div>
-          </div> */}
-        {/* </div> */}
 
         <FiltersForm />
       </section>
@@ -107,21 +88,49 @@ const page = async () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>{t("coursesTotal")}</CardTitle>
+              <CardTitle>{t("coursesTotal")} {'('} {t("timeDefault")} {')'}</CardTitle>
             </CardHeader>
             <CardContent>
               <InfoCards type={"courses"} />
             </CardContent>
           </Card>
         </section>
-        <section className="grid grid-cols-2 gap-5">
-          <PieFull type={"genders"} />
-          <HorizontalBars />
-          <div className="h-28"></div>
-          <div className="h-28"></div>
-          <div className="h-28"></div>
-        </section>
+        
+          <section className="grid md:grid-cols-2 gap-5">
+            <PieFull type={"genders"} />
+            <HorizontalBars />
+          </section>
+          
+
+        
       </section>
+
+      <section className="my-14">
+        <h2 className="my-6">
+          Listado de notas:
+        </h2>
+            <div className="relative w-full max-h-[51vh] overflow-auto ">
+            <Table className="w-full">
+          
+                <TableHeader>
+                  <TableRow>
+                    <TableHead >Estudiante</TableHead>
+                    <TableHead className="bg-accent/80">Nota</TableHead>
+                    <TableHead>Aprovado</TableHead>
+                    <TableHead>Curso</TableHead>
+                    <TableHead>Estado</TableHead>
+                    <TableHead>Año</TableHead>
+
+                  </TableRow>
+                </TableHeader>
+                <TableContent />
+                
+              </Table>
+
+
+            </div>
+         
+          </section>
     </div>
   );
 };

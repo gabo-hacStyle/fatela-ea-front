@@ -31,19 +31,19 @@ const Navbar = () => {
 
   
   return (
-    <nav className="main-navbar ">
-    <div className="logo">AnReHis</div>
-    <div className="platform">{t('hero')} 📓</div>
-    <Popover>
-  <PopoverTrigger className='border bg-black rounded p-2'><GlobeIcon/></PopoverTrigger>
-  <PopoverContent className='flex flex-col w-24'>
-    <button className='cursor-pointer hover:bg-primary/10 p-1'  onClick={() => onChange('en')}>EN</button>
-    <hr />
-    <button className='cursor-pointer hover:bg-primary/10 p-1' onClick={() => onChange('es')} >ES</button>
-    <hr /> 
-    <button className='cursor-pointer hover:bg-primary/10 p-1' onClick={() => onChange('pt')} >PT</button>
-  </PopoverContent>
-</Popover>
+    <nav className="main-navbar gap-6">
+      <div className="logo">AnReHis</div>
+      <div className="platform hidden sm:block">{t('hero')} 📓</div>
+      <Popover>
+        <PopoverTrigger className='border bg-black rounded p-2'><GlobeIcon/></PopoverTrigger>
+        <PopoverContent className='flex flex-col w-24'>
+          <button className='cursor-pointer hover:bg-primary/10 p-1'  onClick={() => onChange('en')}>EN</button>
+          <hr />
+          <button className='cursor-pointer hover:bg-primary/10 p-1' onClick={() => onChange('es')} >ES</button>
+          <hr /> 
+          <button className='cursor-pointer hover:bg-primary/10 p-1' onClick={() => onChange('pt')} >PT</button>
+        </PopoverContent>
+    </Popover>
   </nav>
   )
 }

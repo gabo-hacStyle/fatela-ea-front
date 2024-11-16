@@ -21,7 +21,7 @@ const LogoutButton = ({position}: LogoutButtonProps) => {
   return (
     <Button
                 onClick={handleLogout}
-                className={`${position === 'top' ? 'lg:hidden absolute right-7 top-2' : 'hidden lg:block'} `}
+                className={`absolute right-7 top-10`}
                 >
                     Log out
                 </Button>

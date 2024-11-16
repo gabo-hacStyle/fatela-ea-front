@@ -97,6 +97,19 @@ export type NotesByCountry = {
     grades: Note[];
 }
 
+export type PagesInfo = {
+    size: number,
+        number: number;
+        totalElements: number;
+        totalPages: number;
+
+}
+
+export type NotesPaginationResponse = {
+    content: Note[];
+    page: PagesInfo
+}
+
 export type StudentsCountByConutry = {
     count: number;
     country: string;

@@ -9,6 +9,8 @@ import {
 import { handleGetCountries, handleGetPrograms } from '@/actions/catalogsActions';
 import { Country, Program } from '@/index';
 
+import { useUpdateInfo } from '@/hooks/useUpdateInfo';
+
 
 interface Props {
     type: 'program' | 'year' | 'country' ;
@@ -17,6 +19,7 @@ interface Props {
 }
 
 const SelectItems =  ({field, type}: Props) => {
+    const { setCoursesInProgram, setYearSelected } = useUpdateInfo();
     const [data, setData] = useState<any[]>([])
     useEffect(() => {
         const fetchData = async () => {
@@ -45,17 +48,27 @@ const SelectItems =  ({field, type}: Props) => {
         fetchData()
     }, [])
 
+    const handleSelectChange = (value: string) => {
+      field.onChange(value);
+      if (type === 'program') {
+        const selectedProgram = data.find((program: Program) => program.name === value);
+        setCoursesInProgram({ active: true, total: selectedProgram.courses.length });
+      } else if (type === 'year') {
+        setYearSelected({ selected: true, year: Number(value) });
+      }
+    };
+
 
     const renderSelectItems = () => {
         if (type === 'program' ) {
           return data.map((program: Program, index: number) => (
-            <SelectItem key={index} value={program.programCode}>
+            <SelectItem key={index} value={program.name}  >
               {program.name}
             </SelectItem>
           ));
         } else if (type === 'year' ) {
           return data.map((year: number,) => (
-            <SelectItem key={year} value={String(year)}>
+            <SelectItem key={year} value={String(year)} >
               {year}
             </SelectItem>
           ));
@@ -70,11 +83,11 @@ const SelectItems =  ({field, type}: Props) => {
       };
 
   return (
-    <Select defaultValue={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className="w-[180px]">
+    <Select  defaultValue={field.value} onValueChange={handleSelectChange}>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder={`Select ${type}`} />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent >
                   {renderSelectItems()}
                 </SelectContent>
               </Select>

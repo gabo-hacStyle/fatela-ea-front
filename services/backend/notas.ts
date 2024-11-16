@@ -1,26 +1,26 @@
 'use server';
-import { Note, NotesByCountry, QuantityInfo } from "@/index";
+import { NotesByCountry, NotesPaginationResponse, QuantityInfo } from "@/index";
 
 import { BASE_URL } from "./url";
 const BASE_GRADES = `${BASE_URL}/grades`;
 
 //get all notes
-export const getNotes = async (token: string) => {
-    try {
-        const response = await fetch(`${BASE_GRADES}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            cache: 'default'
-        });
-        const data = await response.json();
-        return data as Note[];
-    } catch (error) {
-        throw new Error(`Failed to get notes: ${error}`);
-    }
-}
+// export const getNotes = async (token: string) => {
+//     try {
+//         const response = await fetch(`${BASE_GRADES}`, {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${token}`
+//             },
+//             cache: 'default'
+//         });
+//         const data = await response.json();
+//         return data as Note[];
+//     } catch (error) {
+//         throw new Error(`Failed to get notes: ${error}`);
+//     }
+// }
 
 export const getQuantityInfo = async(token: string, query: string | null) => {
     try {
@@ -32,7 +32,7 @@ export const getQuantityInfo = async(token: string, query: string | null) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            cache: 'default'
+            cache: 'force-cache'
         });
         const data = await response.json();
         return data as QuantityInfo;
@@ -41,9 +41,10 @@ export const getQuantityInfo = async(token: string, query: string | null) => {
     }
 }
 
-export const getFilteredNotes = async(token: string, query: string) => {
+export const getFilteredNotes = async(token: string, query: string | null) => {
     try {
-        const response = await fetch(`${BASE_GRADES}/filteredBy${query}`, {
+        const queryReal = query ? query : '';
+        const response = await fetch(`${BASE_GRADES}/filteredBy${queryReal}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ export const getFilteredNotes = async(token: string, query: string) => {
             cache: 'default'
         });
         const data = await response.json();
-        return data as Note[];
+        return data as NotesPaginationResponse;
     } catch (error) {
         throw new Error(`Failed to get notes: ${error}`);
     }

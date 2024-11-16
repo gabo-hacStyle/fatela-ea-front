@@ -1,7 +1,7 @@
 'use client';
 import React, {useState, useEffect} from 'react'
 import {Checkbox} from '@/components/ui/checkbox'
-import { FormItem } from '@/components/ui/form';
+import { FormItem, FormLabel } from '@/components/ui/form';
 
 
 interface Props {
@@ -19,8 +19,8 @@ const CheckboxItems = ({type, field}: Props) => {
 
         {
             type === 'approved' ? (
-                <>
-                <FormItem className="w-full mt-6" >
+                <div className='flex items-center justify-around'> 
+                <FormItem className=" gap-4 w-full mt-6 items-center flex" >
                 <Checkbox
                     
                    
@@ -30,12 +30,12 @@ const CheckboxItems = ({type, field}: Props) => {
                             field.onChange(checked ? 'S' : '')
                         }   
                     }
-                /> <span>
+                />  <FormLabel>
                     Solo aprovados
-                </span>
+                </FormLabel>
                                     
                 </FormItem>
-                <FormItem className="w-full mt-6">
+                <FormItem className=" gap-4 w-full mt-6 items-center flex">
                 
                 <Checkbox
                     
@@ -45,17 +45,17 @@ const CheckboxItems = ({type, field}: Props) => {
                             field.onChange(checked ? 'N' : '')
                         }
                    }
-                /> <span>
-                    Solo NO aprovados
-                </span>
+                />  <FormLabel>
+              No aprobados
+            </FormLabel>
                 </FormItem>
 
-                </>
+                </div>
                 
 
             ) : (
-                <>
-                <FormItem className="w-full mt-6">
+                <div className='flex items-center justify-around'> 
+                <FormItem className=" gap-4 w-full items-center flex">
                 <Checkbox
                     checked={field.value === 'Masculino'}
                    onCheckedChange={
@@ -63,13 +63,13 @@ const CheckboxItems = ({type, field}: Props) => {
                            field.onChange(checked ? 'Masculino' : '')
                         }
                    }
-                /> <span>
-                    Masculino
-                </span>
+                />  <FormLabel>
+                Masculino
+            </FormLabel>
 
                 </FormItem>
                
-                <FormItem className="w-full mt-6">
+                <FormItem className=" gap-4 w-full items-center flex">
                 <Checkbox
                     checked={field.value === 'Femenino'}
                    onCheckedChange={
@@ -78,15 +78,15 @@ const CheckboxItems = ({type, field}: Props) => {
                         }
 
                    }
-                /> <span>
-                    Femenino
-                </span>
+                />  <FormLabel>
+                Femenino
+            </FormLabel>
                     
                 </FormItem>
 
                 
                 
-                </>
+                </div>
                 
             )
         }

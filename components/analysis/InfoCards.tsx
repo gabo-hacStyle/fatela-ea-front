@@ -18,17 +18,33 @@ const InfoCards = ({type}: InfoCardsProps) => {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
+    // console.log('Será que está o no esta habilitado?', coursesInProgram.active)
+    // console.log('Este es el numero de cursos en el estado global', coursesInProgram.total)
+
     const responseData = async () => {
       const response = await handleGetQuantityInfo(query);
-      setData(
-        type === 'students' ? response.totalStudents : response.totalCourses
-      );
+      if(response) {
+        switch (type) {
+          case 'students':
+            setData(response.totalStudents);
+            break;
+          case 'courses':
+            
+              setData(response.totalCourses)
+            
+            break;
+          default:
+            break;
+        }
+        
+      }
+      
     }
     responseData();
 
   }, [query])
 
-
+  
 
   return (
     <>

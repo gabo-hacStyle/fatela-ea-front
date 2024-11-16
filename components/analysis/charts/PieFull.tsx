@@ -34,8 +34,9 @@ interface Props {
 
 export function PieFull({ type }: Props) {
   const t = useTranslations('staffPage');
-  const { query } = useUpdateInfo();
+  const { query, yearSelected } = useUpdateInfo();
   const [data, setData] = useState<any>(null);
+  const [periodo, setPeriodo] = useState<number>();
 
 
   function normalizeString(str: string) {
@@ -43,9 +44,17 @@ export function PieFull({ type }: Props) {
   }
 
   useEffect(() => {
+    console.log('Sera que esta seleccionado un año?', yearSelected.selected)
+    console.log('Este es el año seleccionado', yearSelected.year)
     const responseData = async () => {
       const response = await handleGetQuantityInfo(query);
-      setData(response.studentsByCountry as StudentsCountByConutry[]);
+      if(response) {
+        if(yearSelected.selected){
+          setPeriodo(yearSelected.year);
+        }
+        setData(response.studentsByCountry as StudentsCountByConutry[]);
+      }
+      
     };
     responseData();
   }, [query]);
@@ -90,7 +99,7 @@ export function PieFull({ type }: Props) {
           Estudiantes por pais
         </CardTitle>
         <CardDescription>
-          {t('timeTextDefault')} {t('timeDefault')}
+          {t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">

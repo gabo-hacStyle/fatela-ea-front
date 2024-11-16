@@ -29,13 +29,22 @@ import { handleGetQuantityInfo } from '@/actions/gradesActions';
 
 export function HorizontalBars() {
   const t = useTranslations('staffPage');
-  const { query } = useUpdateInfo();
+  const { query, yearSelected } = useUpdateInfo();
   const [data, setData] = useState<any>(null);
+  const [periodo, setPeriodo] = useState<number>();
 
   useEffect(() => {
     const responseData = async () => {
       const response = await handleGetQuantityInfo(query);
-      setData(response);
+      if(response){
+        if(yearSelected.selected){
+          setPeriodo(yearSelected.year);
+        }
+        
+        setData(response);
+        
+      }
+      
     };
     responseData();
   }, [query]);
@@ -60,7 +69,7 @@ export function HorizontalBars() {
     <Card>
       <CardHeader>
         <CardTitle>Por genero</CardTitle>
-        <CardDescription>{t('timeTextDefault')} {t('timeDefault')}</CardDescription>
+        <CardDescription>{t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
