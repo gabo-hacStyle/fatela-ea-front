@@ -11,7 +11,7 @@ import { getTranslations } from 'next-intl/server';
 
 
 const layout = async({children}: Readonly<{children: React.ReactNode}>) => {
-    const t = await getTranslations('');
+    const t = await getTranslations('shared');
 
     const user = await getCookie('user');
     const userJson = JSON.parse(user? user : '') as User;
@@ -22,24 +22,24 @@ const layout = async({children}: Readonly<{children: React.ReactNode}>) => {
       <>
           {/* <Sidebar role="admin" /> */}
           <main className="wrapper">
-          <header className=" flex flex-col gap-10 lg:p-4 my-10 lg:mb-8">
+          <header className=" flex flex-col gap-10  my-10 lg:mb-8">
 
           {/* <Badge className="w-1/6" variant={'secondary'}> */}
           <h1 className="lg:text-5xl text-2xl  font-semibold text-secondary">{userJson.name} </h1>
           {/* </Badge> */}
           <div className="flex items-center justify-between">
-            <h1 className="text-5xl text-left font-semibold">
+            <h1 className="text-4xl text-left font-semibold">
                   {/*Condicionando texto*/ }
                   {rolesList.includes('ADMIN') ? 
                   // t('admin') 
-                  'Pagina de administración de la plataforma'
+                  `${t('adminTitle')} `
                   : 
                   rolesList.includes('STAFF') ? 
                   // t('coordinator') 
-                  'Pagina de funcionarios para analisis de datos'
+                  `${t('staffTitle')} `
                   : 
                   // t('staff')
-                  'Pagina de coordinador: ' + country
+                  `${t('cordTitle')} ${country}`
                   }
               
               </h1>

@@ -13,9 +13,11 @@ export const postLogin = async (body: LoginBody) => {
             body: JSON.stringify(body)
         });
         const data = await response.json() as ResponseBody;
+        console.log(response.headers)
+        
         return data;
         
-    } catch (error) {
-        throw new Error(`Failed to login: ${error}`);
+    } catch (error: any) {
+        return error.message as string ;
     }
 }

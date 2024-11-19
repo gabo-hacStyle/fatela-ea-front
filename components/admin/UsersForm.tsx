@@ -45,43 +45,6 @@ import {
 } from "@/actions/userActions";
 import { Country, User } from "@/index";
 
-const userSchemaBase = z.object({
-  // username: z.string({ required_error: "El campo 'Nombre' no puede estar vacío." }),
-  // user_name: z.string({ required_error: "El campo 'email' no puede estar vacío." }),
-  email: z.string({
-    required_error: "El campo 'email' no puede estar vacío.",
-  }).email({
-    message: "El campo 'email' debe ser un correo electrónico válido.",
-  }),
-  name: z.string({
-    required_error: "Se te olvido el nombre",
-  }),
-  enabled: z.boolean(),
-  countryId: z.string(
-    {required_error: "Selecciona el pais." },
-  ),
-  
-});
-
-const adminSchemaAdd = userSchemaBase.extend({
-  password: z.string({
-    required_error: "El campo 'contraseña' no puede estar vacío.",
-  }).min(6, "La contraseña debe tener al menos 6 caracteres."),
-  roles: z.string().array().optional(),
-});
-
-const userSchemaAdd = userSchemaBase.extend({
-  password: z.string({
-    required_error: "El campo 'contraseña' no puede estar vacío.",
-  }).min(6, "La contraseña debe tener al menos 6 caracteres."),
-  roles: z.array(z.string())
-
-});
-
-const userSchemaEdit = userSchemaBase.extend({
-  password: z.string().optional(),
-  roles: z.string().array()
-});
 
 
 
@@ -91,6 +54,48 @@ interface UsersFormProps {
   countries: Country[];
 }
 const UsersForm = ({ usage, user, countries }: UsersFormProps) => {
+  const tr = useTranslations("FormSection");
+
+  const userSchemaBase = z.object({
+    // username: z.string({ required_error: "El campo 'Nombre' no puede estar vacío." }),
+    // user_name: z.string({ required_error: "El campo 'email' no puede estar vacío." }),
+    email: z.string({
+      required_error: `${tr('emailEmpty')}`,
+    }).email({
+      message: `${tr('emailValid')}`,
+    }),
+    name: z.string({
+      required_error: `${tr('nameEmpty')}`,
+    }),
+    enabled: z.boolean(),
+    countryId: z.string(
+      {required_error: `${tr('countryEmpty')}` },
+    ),
+    
+  });
+  
+  const adminSchemaAdd = userSchemaBase.extend({
+    password: z.string({
+      required_error: `${tr('passwordEmpty')}`,
+    }).min(6, `${tr('passwordMin')}`),
+    roles: z.string().array().optional(),
+  });
+  
+  const userSchemaAdd = userSchemaBase.extend({
+    password: z.string({
+      required_error: `${tr('passwordEmpty')}`,
+    }).min(6, `${tr('passwordMin')}`),
+    roles: z.array(z.string())
+  
+  });
+  
+  const userSchemaEdit = userSchemaBase.extend({
+    password: z.string().optional(),
+    roles: z.string().array()
+  });
+  
+
+
 
   const [isRolesEmpty, setIsRolesEmpty] = useState(true);
 

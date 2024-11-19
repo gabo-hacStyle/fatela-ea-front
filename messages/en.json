@@ -3,12 +3,22 @@
     
     "hero": "ACADEMIC REGISTRATION PLATFORM"
   },
+  "shared": {
+    "loading": "Loading...",
+    "cordTitle": "Coordinator Page",
+    "staffTitle": "Staff Page for Data Analysis",
+    "adminTitle": "Platform Administration Page"
+  
+  },
     "LoginPage": {
       "title": "Welcome back! Please enter your credentials.",
       "emailLabel": "Email registered in the system",
       "passwrodLabel": "Password",
       "loginButton": "Login",
-      "noAccount": "Don't have an account? Talk to us to create one"
+      "noAccount": "Don't have an account? Talk to us to create one",
+      "invalidCredentials": "Invalid credentials. Try again",
+      "serverError": "Server error. Wait a few minutes"
+    
     },
     "FormSection": {
       "emailLabel": "Email",
@@ -17,7 +27,15 @@
       "nameLabel"   : "Name",
       "countryLabel": "Country",
       "enabledLabel": "Enabled",
-      "submit": "Submit"
+      "submit": "Submit",
+
+      "emailEmpty": "Email field cannot be empty",
+      "emailValid": "Email must be valid",
+      "passwordEmpty": "Password field cannot be empty",
+      "passwordMin": "Password must be at least 6 characters",
+      "nameEmpty": "Name field cannot be empty",
+      "countryEmpty": "Select a country",
+      "rolesEmpty": "Select at least one role"
     },
     "AdminPage": {
       "title": "Admin Page",
@@ -51,6 +69,8 @@
       "deleteWarn": "Are you sure you want to delete the user with the email:"
     },
     "staffPage": {
+      "btnReport": "Download Report",
+      "btnSearch": "Search",
       "header": "Staff Access",
       "filtersTitle": "Filters Section",
       "select": "Filter by",
@@ -58,14 +78,35 @@
       "programs": "programs",
       "courses": "courses",
       "students": "students",
+      "country": "Country",
+      "maestria": "Master program",
+      "year": "Academic year",
 
       "page": "Page",
       "studentsTotal": "Total Students",
       "coursesTotal": "Total Courses",
       "genderPieTitle": "Student Gender Distribution",
+      "countryPieTitle": "Student Country Distribution",
+      "yearGraphTitle": "Student Distribution by Year",
       "timeTextDefault": "Period: ",
       "timeDefault": "historical",
       "labelMen": "Men",
-      "labelWomen": "Women"
+      "labelWomen": "Women",
+      "qty": "Quantity",
+
+      "approved": "Only Approved",
+      "reproved": "Only Reproved",
+
+      "headingAnalisys": "Analysis Section",
+      "headingGrades": "Student Grades List",
+
+      "emptyTable": "Select a filter to start viewing the data",
+      "studentLabel": "Student",
+      "gradeLabel": "Final Grade",
+      "approvedLabel": "Approved",
+      "notApprovedLabel": "Not Approved",
+      "courseLabel": "Course",
+      "statusLabel": "Status",
+      "yearLabel": "Year"
     }
 }

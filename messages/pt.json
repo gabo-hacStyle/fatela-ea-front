@@ -3,6 +3,13 @@
     
     "hero": "PLATAFOMA DE REGISTROS ACADEMICOS"
   },
+  "shared": {
+    "loading": "Carregando...",
+    "cordTitle": "Página de coordenador",
+      "adminTitle": "Página de administração da plataforma",
+    "staffTitle": "Pagina de funcionarios para analisis de datos"
+  
+  },
   "FormSection": {
       "emailLabel": "Email",
       "passwrodLabel": "Senha",
@@ -10,14 +17,28 @@
       "nameLabel": "Nome",
       "countryLabel": "País",
       "enabledLabel": "Habilitado",
-      "submit": "Enviar"
+      "submit": "Enviar",
+
+      "emailEmpty": "O campo de email não pode estar vazio",
+      "emailValid": "O email deve ser válido",
+      "passwordEmpty": "O campo de senha não pode estar vazio",
+        "passwordMin": "A senha deve ter pelo menos 6 caracteres",
+
+      "nameEmpty": "O campo de nome não pode estar vazio",
+
+       "countryEmpty": "Selecione um país",
+
+        "rolesEmpty": "Selecione pelo menos um papel"
+      
     },
     "LoginPage": {
       "title": "Bem-vindo de volta! Por favor, insira suas credenciais.",
       "emailLabel": "E-mail registrado no sistema",
       "passwrodLabel": "Senha",
       "loginButton": "Entrar",
-      "noAccount": "Não tem uma conta? Fale conosco para criar uma"
+      "noAccount": "Não tem uma conta? Fale conosco para criar uma",
+      "invalidCredentials": "Credenciais inválidas. Tenta de novo",
+      "serverError": "Erro no servidor. Espere alguns minutos"
     },
     "AdminPage": {
       "title": "Página de administrador",
@@ -52,6 +73,8 @@
       "rolesEmpty": "Selecione pelo menos um papel"
     },
     "staffPage": {
+      "btnReport": "Baixar Relatório",
+      "btnSearch": "Pesquisar",
       "header": "Acesso de funcionário",
       "filtersTitle": "Seção de filtros",
       "select": "Filtrar por ",
@@ -59,14 +82,42 @@
       "programs": "programas",
       "courses": "cursos",
       "students": "estudantes",
+      "maestria": "Programas de mestrado",
+      "country": "País",
+      "year": "Ano eletivo",
 
       "page": "Página",
       "studentsTotal": "Total de estudantes",
       "coursesTotal": "Total de cursos",
-      "genderPieTitle": "Distribuição de gênero de estudantes", 
+      "genderPieTitle": "Distribuição de gênero de estudantes",
+      "countryPieTitle": "Distribuição de Estudantes por País",
+      "yearGraphTitle": "Distribuição de Estudantes por Ano", 
+
       "timeTextDefault": "Período: ",
       "timeDefault": "histórico",
       "labelMen": "Homens",
-      "labelWomen": "Mulheres"
+      "labelWomen": "Mulheres",
+      "qty": "Quantidade",
+
+      "approved": "Só Aprovados",
+      "reproved": "Só Reprovados",
+
+      "headingAnalisys": "Seção de análise",
+
+      "headingGrades": "Lista de notas dos estudantes",
+
+      "emptyTable": "Selecciona um filtro para començar a ver os dados",
+
+      "studentLabel": "Estudante",
+        "approvedLabel": "Aprovado",
+        "notApprovedLabel": "Não aprovado",
+
+      "courseLabel": "Curso",
+
+       "statusLabel": "Status",
+
+        "yearLabel": "Ano"
+
+      
     }
 }

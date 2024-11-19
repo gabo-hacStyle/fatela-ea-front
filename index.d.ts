@@ -122,3 +122,8 @@ export type QuantityInfo = {
     totalMales: number;
     studentsByCountry: StudentsCountByConutry[]
 }
+
+export type StudentsByYearResponse = {
+    count: number;
+    year: number;
+}

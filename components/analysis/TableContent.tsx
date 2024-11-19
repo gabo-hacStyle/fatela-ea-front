@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
 
 import {
     TableBody,
@@ -12,8 +12,11 @@ import { handleGetGradesFiltered } from '@/actions/gradesActions';
 import { Note, PagesInfo } from '@/index';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import TableSkeleton from '../shared/skeletons/TableSkeleton';
+import { useTranslations } from 'use-intl';
 
 const TableContent = () => {
+    const t = useTranslations('staffPage');
+    
     const {query, mode, countryId} = useUpdateInfo();
     const [queryPage, setQueryPage] = useState(0);
     const [data, setData] = useState<Note[]>();
@@ -61,7 +64,7 @@ const TableContent = () => {
         const dataLength = pagesInfo?.totalPages;
         return Array.from({ length: dataLength || 0 }, (_, index) => (
           <TabsTrigger key={index} value={index.toString()} onClick={() => handleTabChange(index)}>
-            {`Pagina ${index + 1}`}
+            {`${t('page')} ${index + 1}`}
           </TabsTrigger>
         ));
       };
@@ -69,13 +72,13 @@ const TableContent = () => {
   return (
     <>
         <TableBody>
-            {queryNull && <TableRow><TableCell colSpan={7}>Selecciona un filtro para poder visualizar las notas</TableCell></TableRow>}
+            {queryNull && <TableRow><TableCell colSpan={7}>{t('emptyTable')}</TableCell></TableRow>}
             {loading && <TableSkeleton />}
             {(!loading && data) && data.map((item, index: number) => (
                 <TableRow key={index}>
                     <TableCell>{item.studentName}</TableCell>
                     <TableCell >{item.grade}</TableCell>
-                    <TableCell>{item.approved === 'S'? 'Si aprovo': 'No aprovo'}</TableCell>
+                    <TableCell>{item.approved === 'S'? `${t('approvedLabel')}`: `${'notApprovedLabel'}`}</TableCell>
                     <TableCell>{item.courseCode}</TableCell>
                     <TableCell>{item.status}</TableCell>
                     <TableCell>{item.year}</TableCell>

@@ -3,6 +3,12 @@
     
     "hero": "PLATAFOMA DE REGISTROS ACADEMICOS"
   },
+  "shared": {
+    "loading": "Cargando...",
+    "cordTitle": "Pagina de coordinador:",
+    "staffTitle": "Pagina de funcionarios para analisis de datos",
+    "adminTitle": "Pagina de administración de la plataforma"
+  },
   "FormSection": {
       "emailLabel": "Correo electrónico",
       "passwrodLabel": "Contraseña",
@@ -11,7 +17,17 @@
       "countryLabel": "País",
       "enabledLabel": "Habilitado",
       "submit": "Enviar",
-       "rolesEmpty": "Selecciona un rol por lo menos"
+      "emailEmpty": "El campo de correo electrónico no puede estar vacío",
+      "emailValid": "El correo electrónico debe ser válido",
+      "passwordEmpty": "El campo de contraseña no puede estar vacío",
+        "passwordMin": "La contraseña debe tener al menos 6 caracteres",
+
+      "nameEmpty": "El campo de nombre no puede estar vacío",
+
+       "countryEmpty": "Seleccione un país",
+
+        "rolesEmpty": "Seleccione al menos un rol"
+      
     },
 
     "LoginPage": {
@@ -19,8 +35,9 @@
       "emailLabel": "Email registrado en el sistema",
       "passwrodLabel": "Contraseña",
       "loginButton": "Ingresar",
-      "noAccount": "¿No tienes una cuenta? Habla con nosotros para crear una"
-     
+      "noAccount": "¿No tienes una cuenta? Habla con nosotros para crear una",
+      "invalidCredentials": "Credenciales inválidas. Inténtalo de nuevo",
+      "serverError": "Error en el servidor. Toca esperar unos minutos"
     },
     "AdminPage": {
       "title": "Pagina de administrador ",
@@ -55,6 +72,8 @@
       "deleteWarn": "¿Estas seguro que deseas eliminar al usuario con el email:"
     }, 
     "staffPage": {
+      "btnReport": "Descargar Reporte",
+      "btnSearch": "Buscar",
       "header": "Acceso de funcionario",
       "filtersTitle": "Seccion de filtros",
       "select": "Filtra por ",
@@ -62,16 +81,39 @@
       "programs": "programas",
       "courses": "cursos",
       "students": "estudiantes",
+      "year": "Año academico",
+      "country": "Pais",
+      "maestria": "Programa de maestría",
+      
 
 
       "page": "Pagina",
       "studentsTotal": "Total de estudiantes",
       "coursesTotal": "Total de cursos",
       "genderPieTitle": "Distribuición de género de estudiantes", 
+      "countryPieTitle": "Distribución de estudiantes por país",
+      "yearGraphTitle": "Distribución de estudiantes por año",
+
       "timeTextDefault": "Periodo: ",
       "timeDefault": "historico",
       "labelMen": "Hombres",
-      "labelWomen": "Mujeres"
+      "labelWomen": "Mujeres",
+      "qty": "Cantidad",
+      "approved": "Solo Aprobados",
+      "reproved": "Solo Reprobados",
+
+      "headingAnalisys": "Sección de análisis",
+      "headingGrades": "Listado de notas de estudiantes",
+      "emptyTable": "Selecciona un filtro para poder visualizar las notas",
+      
+      "studentLabel": "Estudiante",
+      "gradeLabel": "Nota Final",
+      "approvedLabel": "Aprobado",
+      "notApprovedLabel": "No Aprobado",
+      "courseLabel": "Curso",
+      "statusLabel": "Estado",
+      "yearLabel": "Año"
+      
 
     }
 }

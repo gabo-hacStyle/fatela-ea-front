@@ -23,9 +23,9 @@ const page = async () => {
 
   return (
     <>
-      <header>
+      <header className='flex items-center justify-between'>
         
-        <p>
+        <p className='w-3/4'>
           {t('info')}
         </p>
 

@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import {Checkbox} from '@/components/ui/checkbox'
 import { FormItem, FormLabel } from '@/components/ui/form';
+import { useTranslations } from 'next-intl';
 
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 
 const CheckboxItems = ({type, field}: Props) => {
+    const t = useTranslations('staffPage');
 
     // const [data, setData] = useState<any>(null);
 
@@ -31,7 +33,7 @@ const CheckboxItems = ({type, field}: Props) => {
                         }   
                     }
                 />  <FormLabel>
-                    Solo aprovados
+                    {t('approved')}
                 </FormLabel>
                                     
                 </FormItem>
@@ -46,7 +48,7 @@ const CheckboxItems = ({type, field}: Props) => {
                         }
                    }
                 />  <FormLabel>
-              No aprobados
+              {t('reproved')}
             </FormLabel>
                 </FormItem>
 
@@ -64,7 +66,7 @@ const CheckboxItems = ({type, field}: Props) => {
                         }
                    }
                 />  <FormLabel>
-                Masculino
+                {t('labelMen')}
             </FormLabel>
 
                 </FormItem>
@@ -79,7 +81,7 @@ const CheckboxItems = ({type, field}: Props) => {
 
                    }
                 />  <FormLabel>
-                Femenino
+                {t('labelWomen')}
             </FormLabel>
                     
                 </FormItem>

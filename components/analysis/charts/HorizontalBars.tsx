@@ -65,14 +65,16 @@ export function HorizontalBars() {
   } satisfies ChartConfig;
 
   const chartData = [
-    { gender: 'males', qty: data?.totalMales, fill: 'var(--color-males)' },
-    { gender: 'females', qty: data?.totalFemales, fill: 'var(--color-females)' },
+    { gender: `${t('labelMen')}`, num: data?.totalMales, fill: 'var(--color-males)' },
+    { gender: `${t('labelWomen')}`, num: data?.totalFemales, fill: 'var(--color-females)' },
   ];
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Por genero</CardTitle>
+        <CardTitle>
+          {t('genderPieTitle')}
+        </CardTitle>
         <CardDescription>{t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}</CardDescription>
       </CardHeader>
       <CardContent>
@@ -94,15 +96,15 @@ export function HorizontalBars() {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => value}
             />
-            <XAxis dataKey="qty" type="number" />
+            <XAxis dataKey='num' type="number" />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="line" />}
             />
             <Bar
-              dataKey="qty"
+              dataKey="num"
               layout="vertical"
               fill="hsl(var(--chart-1))"
               radius={4}
@@ -115,7 +117,7 @@ export function HorizontalBars() {
                 fontSize={12}
               />
               <LabelList
-                dataKey="qty"
+                dataKey="num"
                 position="right"
                 offset={8}
                 className="fill-foreground"

@@ -45,6 +45,7 @@ const authFormSchema = z.object({
 });
 const FormAuth = () => {
   const t = useTranslations('LoginPage');
+  const u = useTranslations('shared');
 
   //Defining the form
   const form = useForm<z.infer<typeof authFormSchema>>({
@@ -52,21 +53,29 @@ const FormAuth = () => {
     defaultValues: defaultValuesAuthForm,
   })
   const [error, setErrorForm] = useState('')
-    const [disabled, setDisabled] = useState(false);
+    // const [disabled, setDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [created, setCreated] = useState(false);
+    // const [created, setCreated] = useState(false);
 
     async function onSubmit(data: z.infer<typeof authFormSchema>) {
-        setDisabled(true);
+      setErrorForm('')
+        // setDisabled(true);
         setLoading(true);
-        try {
-            await handleLoginUser(data);
-            setCreated(true);
-            setErrorForm('')
-        } catch (error: any) {
-            setErrorForm(error.message)
-        }
-        setDisabled(false);
+        
+            const response = await handleLoginUser(data);
+            console.log(response)
+            if(response === '403'){
+              // setCreated(true);
+              setErrorForm(t('invalidCredentials'))
+            } 
+            if(response === '500'){
+              // setCreated(true);
+              setErrorForm(t('serverError'))
+            }
+            
+        
+        
+        // setDisabled(false);
         setLoading(false);
     }
 
@@ -119,7 +128,8 @@ const FormAuth = () => {
             {t('loginButton')}
           </Button>
       </div>
-      {loading && <div>loading....</div>}
+      {loading && <div>{u('loading')}</div>}
+      {error && <div>{error}</div>}
     </form>
 
 

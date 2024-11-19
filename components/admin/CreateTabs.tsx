@@ -16,7 +16,7 @@ const CreateTabs = ({user, countries}: Props) => {
   return (
     <>
         <Tabs defaultValue="normalUser" className="w-[400px]">
-            <TabsList>
+            <TabsList className='bg-muted'>
             <TabsTrigger value="normalUser">{t('tab1')}</TabsTrigger>
             <TabsTrigger value="adminUser">{t('tab2')}</TabsTrigger>
             </TabsList>

@@ -48,6 +48,7 @@ interface Props {
     view:   'staff' | 'coord';
 }
 const FiltersForm = ({view}: Props) => {
+    const t = useTranslations('staffPage');
     const { setQuery, setYearSelected } = useUpdateInfo();
 
     useEffect(() => {
@@ -107,7 +108,7 @@ const FiltersForm = ({view}: Props) => {
                             render={({ field }) => (
                                 <FormItem className="w-full mt-6" >
                                     <FormLabel>
-                                        Programa de maestría
+                                        {t('maestria')}
 
                                     </FormLabel>
                                     <FormControl>
@@ -127,7 +128,7 @@ const FiltersForm = ({view}: Props) => {
                                 render={({ field }) => (
                                     <FormItem className="w-full mt-6" >
                                         <FormLabel>
-                                            Pais
+                                            {t('country')}
 
                                         </FormLabel>
                                         <FormControl>
@@ -164,7 +165,7 @@ const FiltersForm = ({view}: Props) => {
                             render={({ field }) => (
                                 <FormItem className="w-full mt-6" >
                                     <FormLabel>
-                                        Año
+                                        {t('year')}
 
                                     </FormLabel>
                                     <FormControl>
@@ -200,7 +201,7 @@ const FiltersForm = ({view}: Props) => {
                 </div>
                             <div className='flex md:justify-end '> 
                             <Button type='submit'>
-                    Buscar
+                    {t('btnSearch')}
                 </Button>
 
                             </div>

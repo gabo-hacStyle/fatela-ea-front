@@ -102,9 +102,9 @@ export function PieFull({ type }: Props) {
 
   return (
     <Card className="flex flex-col">
-      <CardHeader className="items-center pb-0">
+      <CardHeader className=" pb-0">
         <CardTitle>
-          Estudiantes por pais
+          {t('countryPieTitle')}
         </CardTitle>
         <CardDescription>
           {t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}

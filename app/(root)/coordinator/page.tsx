@@ -18,19 +18,26 @@ import {
   import TableContent from "@/components/analysis/TableContent";
 import { getCookie } from "@/utils/cookiesManager";
 import { User } from "@/index";
-import { handleGetQuantityInfo } from "@/actions/gradesActions";
+import { handleGetQuantityInfo, handleGetStudentsByYear } from "@/actions/gradesActions";
 import ClientStateSetter from "@/components/hidden/ClientStateSetter";
 
 import InfoCards from "@/components/analysis/InfoCards";
 import { HorizontalBars } from "@/components/analysis/charts/HorizontalBars";
 import FiltersForm from "@/components/analysis/filters/FiltersForm";
+import { Button } from "@/components/ui/button";
+import { getTranslations } from "next-intl/server";
+import { handleGetStudents } from "@/actions/catalogsActions";
+import { AreaChart } from "lucide-react";
+import { AreaChartComponent } from "@/components/analysis/charts/AreaChart";
 const page = async () => {
+  const t = await getTranslations("staffPage");
 
   const user = await getCookie('user');
   const userJson = JSON.parse(user? user : '') as User;
   const country = userJson.country.countryId;
 
   await handleGetQuantityInfo(null, 'coord', country);
+  await handleGetStudentsByYear(country)
     
     return (
     <div>
@@ -47,7 +54,12 @@ const page = async () => {
       </section>
 
       <section className="grid gap-5" id="analysis">
-      <h1 className="text-center text-2xl my-8">Sección de análisis</h1>
+      <h1 className="text-center text-2xl my-8">
+      {t('headingAnalisys')}
+      </h1>
+      <Button> 
+        {t('btnReport')}
+      </Button>
         <section
           className="grid md:grid-cols-2 gap-5"
           id="numbersPart"
@@ -55,8 +67,8 @@ const page = async () => {
           <Card>
             <CardHeader>
               <CardTitle>
-                {/* {t("studentsTotal")} */}
-                Estudiantes totales
+                {t("studentsTotal")}
+           
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -68,8 +80,8 @@ const page = async () => {
             <CardHeader>
               <CardTitle>
                 {/* {t("coursesTotal")} {'('} {t("timeDefault")} {')'} */}
-                Cursos totales (historico)
-              </CardTitle>
+                <CardTitle>{t("coursesTotal")} {'('} {t("timeDefault")} {')'}</CardTitle>
+                </CardTitle>
             </CardHeader>
             <CardContent>
               <InfoCards type={"courses"} />
@@ -77,7 +89,8 @@ const page = async () => {
           </Card>
         </section>
         
-          <section className="grid  gap-5">
+          <section className="grid grid-cols-2 gap-5">
+            <AreaChartComponent />
             <HorizontalBars />
           </section>
           
@@ -89,19 +102,19 @@ const page = async () => {
 
         <section className="my-14">
         <h2 className="text-center text-2xl my-8">
-          Listado de notas:
+        {t('headingGrades')}
         </h2>
             <div className="relative w-full max-h-[51vh] overflow-auto ">
             <Table className="w-full">
           
                 <TableHeader>
                   <TableRow>
-                    <TableHead >Estudiante</TableHead>
-                    <TableHead >Nota</TableHead>
-                    <TableHead>Aprovado</TableHead>
-                    <TableHead>Curso</TableHead>
-                    <TableHead>Estado</TableHead>
-                    <TableHead>Año</TableHead>
+                    <TableHead >{t('studentLabel')}</TableHead>
+                    <TableHead>{t('gradeLabel')}</TableHead>
+                    <TableHead>{t('approvedLabel')}</TableHead>
+                    <TableHead>{t('courseLabel')}</TableHead>
+                    <TableHead>{t('statusLabel')}</TableHead>
+                    <TableHead>{t('yearLabel')}</TableHead>
 
                   </TableRow>
                 </TableHeader>

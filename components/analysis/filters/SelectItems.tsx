@@ -10,6 +10,7 @@ import { handleGetCountries, handleGetPrograms } from '@/actions/catalogsActions
 import { Country, Program } from '@/index';
 
 import { useUpdateInfo } from '@/hooks/useUpdateInfo';
+import { useTranslations } from 'next-intl';
 
 
 interface Props {
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const SelectItems =  ({field, type}: Props) => {
+    const t = useTranslations('staffPage'); 
     const { setCoursesInProgram, setYearSelected } = useUpdateInfo();
     const [data, setData] = useState<any[]>([])
     useEffect(() => {
@@ -85,7 +87,7 @@ const SelectItems =  ({field, type}: Props) => {
   return (
     <Select  defaultValue={field.value} onValueChange={handleSelectChange}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={`Select ${type}`} />
+                  <SelectValue placeholder={`${t('select')} ${type}`} />
                 </SelectTrigger>
                 <SelectContent >
                   {renderSelectItems()}
