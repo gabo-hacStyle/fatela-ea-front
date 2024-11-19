@@ -27,6 +27,7 @@ import { useTranslations } from "next-intl";
 import { useUpdateInfo } from "@/hooks/useUpdateInfo";
 import { handleGetQuantityInfo } from '@/actions/gradesActions';
 import { StudentsCountByConutry } from '@/index';
+import PieGraph from '@/components/shared/skeletons/PieGraph';
 
 interface Props {
   type: string;
@@ -37,6 +38,7 @@ export function PieFull({ type }: Props) {
   const { query, yearSelected, mode, countryId } = useUpdateInfo();
   const [data, setData] = useState<any>(null);
   const [periodo, setPeriodo] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
 
 
   function normalizeString(str: string) {
@@ -44,9 +46,12 @@ export function PieFull({ type }: Props) {
   }
 
   useEffect(() => {
+    // console.log(query)
     // console.log('Sera que esta seleccionado un año?', yearSelected.selected)
     // console.log('Este es el año seleccionado', yearSelected.year)
+    setLoading(true);
     const responseData = async () => {
+      
       const response = await handleGetQuantityInfo(query, mode, countryId);
       if(response) {
         if(yearSelected.selected){
@@ -54,13 +59,13 @@ export function PieFull({ type }: Props) {
         }
         setData(response.studentsByCountry as StudentsCountByConutry[]);
       }
-      
+      setLoading(false);
     };
     setTimeout(() => {
       responseData();
     }, 300)
     // responseData();
-  }, [query]);
+  }, [query, mode, countryId]);
 
 
 
@@ -106,6 +111,8 @@ export function PieFull({ type }: Props) {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
+    {loading && <PieGraph />}
+    {!loading && (
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"
@@ -128,7 +135,7 @@ export function PieFull({ type }: Props) {
             
             
           </PieChart>
-        </ChartContainer>
+        </ChartContainer>)}
       </CardContent>
     </Card>
   );

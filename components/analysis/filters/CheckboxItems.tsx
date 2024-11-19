@@ -55,7 +55,7 @@ const CheckboxItems = ({type, field}: Props) => {
 
             ) : (
                 <div className='flex items-center justify-around'> 
-                <FormItem className=" gap-4 w-full items-center flex">
+                <FormItem className=" gap-4 w-full mt-6 items-center flex">
                 <Checkbox
                     checked={field.value === 'Masculino'}
                    onCheckedChange={
@@ -69,7 +69,7 @@ const CheckboxItems = ({type, field}: Props) => {
 
                 </FormItem>
                
-                <FormItem className=" gap-4 w-full items-center flex">
+                <FormItem className=" gap-4 w-full mt-6 items-center flex">
                 <Checkbox
                     checked={field.value === 'Femenino'}
                    onCheckedChange={

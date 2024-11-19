@@ -13,6 +13,7 @@ const ClientStateSetter = ({countryId, mode}: Props) => {
     const  {setCountryId, setMode, setQuery} = useUpdateInfo();
 
     useEffect(() => {
+      console.log('Llegando aca mamahuevo')
         setCountryId(countryId);
         setMode(mode);
         setQuery('');

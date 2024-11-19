@@ -67,16 +67,17 @@ const page = async () => {
 
       <section
         id="filtros"
-        className=" border-secondary border-2 rounded-lg p-6 mx-auto my-9"
+        className="  p-6 mx-auto my-9 shadow-xl"
       >
-        <h2 className="text-xl">{t("filtersTitle")}</h2>
+        {/* <h2 className="text-xl font-semibold rounded-md text-center w-1/4 bg-primary  text-white py-1  ">{t("filtersTitle")}</h2> */}
 
         <FiltersForm view="staff" />
       </section>
 
       <section className="grid gap-5" id="analysis">
+        <h1 className="text-center text-2xl my-8">Sección de análisis</h1>
         <section
-          className="grid md:grid-cols-2 2xl:grid-cols-4 gap-5"
+          className="grid md:grid-cols-2  gap-5"
           id="numbersPart"
         >
           <Card>
@@ -108,7 +109,7 @@ const page = async () => {
       </section>
 
       <section className="my-14">
-        <h2 className="my-6">
+        <h2 className="text-center text-2xl my-8">
           Listado de notas:
         </h2>
             <div className="relative w-full max-h-[51vh] overflow-auto ">
@@ -117,7 +118,7 @@ const page = async () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead >Estudiante</TableHead>
-                    <TableHead className="bg-accent/80">Nota</TableHead>
+                    <TableHead>Nota</TableHead>
                     <TableHead>Aprovado</TableHead>
                     <TableHead>Curso</TableHead>
                     <TableHead>Estado</TableHead>

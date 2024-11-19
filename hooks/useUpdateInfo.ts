@@ -25,7 +25,7 @@ type UpdateInfoType = {
         total: number;
     };
     mode: 'staff' | 'coord' | null;
-    setMode: (mode: 'staff' | 'coord') => void;
+    setMode: (mode: 'staff' | 'coord' | null) => void;
     countryId: number | null;
     setCountryId: (countryId: number | null) => void;
     setCoursesInProgram: (coursesInProgram: {
@@ -49,7 +49,7 @@ export const useUpdateInfo = create<UpdateInfoType>((set) => ({
         total: 0,
     },
     mode: null,
-    setMode: (mode: 'staff' | 'coord') => set({mode}),
+    setMode: (mode: 'staff' | 'coord' | null) => set({mode}),
     countryId: null,
     setCountryId: (countryId: number | null) => set({countryId}),
     setCoursesInProgram: (coursesInProgram: {

@@ -5,15 +5,20 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation';
 
 import { deleteCookie } from '@/utils/cookiesManager';
+import { useUpdateInfo } from '@/hooks/useUpdateInfo';
 
 type LogoutButtonProps = {
     position: 'top' | 'sidebar'        
 }
 
 const LogoutButton = ({position}: LogoutButtonProps) => {
+    const { setCountryId, setMode, setQuery } = useUpdateInfo();
     const router = useRouter();
 
     async function handleLogout() {
+        setCountryId(null);
+        setMode(null);
+        setQuery('');
         deleteCookie('token');
         router.push('/');
     }
@@ -21,7 +26,7 @@ const LogoutButton = ({position}: LogoutButtonProps) => {
   return (
     <Button
                 onClick={handleLogout}
-                className={`absolute right-7 top-10`}
+                variant="outline"  
                 >
                     Log out
                 </Button>

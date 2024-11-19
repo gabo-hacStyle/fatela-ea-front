@@ -26,15 +26,19 @@ import {
 import { useTranslations } from "next-intl";
 import { useUpdateInfo } from "@/hooks/useUpdateInfo";
 import { handleGetQuantityInfo } from '@/actions/gradesActions';
+import PieGraph from '@/components/shared/skeletons/PieGraph';
+import BarsGraph from '@/components/shared/skeletons/BarsGraph';
 
 export function HorizontalBars() {
   const t = useTranslations('staffPage');
   const { query, yearSelected, mode, countryId } = useUpdateInfo();
   const [data, setData] = useState<any>(null);
   const [periodo, setPeriodo] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const responseData = async () => {
+      setLoading(true);
       const response = await handleGetQuantityInfo(query, mode, countryId);
       if(response){
         if(yearSelected.selected){
@@ -44,7 +48,7 @@ export function HorizontalBars() {
         setData(response);
         
       }
-      
+      setLoading(false);
     };
     responseData();
   }, [query, mode, countryId]);
@@ -72,7 +76,9 @@ export function HorizontalBars() {
         <CardDescription>{t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        {loading && <div className="flex justify-center"><BarsGraph /></div>}
+        {!loading &&  (
+        <ChartContainer config={chartConfig} className="mx-auto aspect-video max-h-[250px]">
           <BarChart
             accessibilityLayer
             data={chartData}
@@ -117,7 +123,7 @@ export function HorizontalBars() {
               />
             </Bar>
           </BarChart>
-        </ChartContainer>
+        </ChartContainer>)}
       </CardContent>
     </Card>
   );

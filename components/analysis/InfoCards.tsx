@@ -4,6 +4,7 @@ import { useUpdateInfo } from '@/hooks/useUpdateInfo';
 import { handleGetQuantityInfo } from '@/actions/gradesActions';
 
 import { useTranslations } from "next-intl";
+import InfoCardsSkeleton from '../shared/skeletons/InfoCardsSkeleton';
 
 
 
@@ -19,10 +20,12 @@ const InfoCards = ({type}: InfoCardsProps) => {
   const [data, setData] = useState<any>(null);
   const [periodo, setPeriodo] = useState<number>();
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     // console.log('Será que está o no esta habilitado?', coursesInProgram.active)
     // console.log('Este es el numero de cursos en el estado global', coursesInProgram.total)
-
+    setLoading(true)
     const responseData = async () => {
       console.log('mode en el cliente', mode)
       console.log('countryId en el cliente', countryId)
@@ -45,7 +48,7 @@ const InfoCards = ({type}: InfoCardsProps) => {
         }
         
       }
-      
+      setLoading(false);
     }
     setTimeout(() => {
       responseData();
@@ -58,9 +61,15 @@ const InfoCards = ({type}: InfoCardsProps) => {
 
   return (
     <>
-    <h2 className='text-muted-foreground'>
-    {t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}
-    </h2>
+    {
+      type === 'students' && (
+      <h2 className='text-muted-foreground'>
+
+      {t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}
+      </h2>
+      )
+    }
+    {loading && (<InfoCardsSkeleton />)}
     <p>
       {data}
     </p>

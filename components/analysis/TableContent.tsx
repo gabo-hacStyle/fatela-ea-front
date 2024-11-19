@@ -11,6 +11,7 @@ import { useUpdateInfo } from '@/hooks/useUpdateInfo';
 import { handleGetGradesFiltered } from '@/actions/gradesActions';
 import { Note, PagesInfo } from '@/index';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import TableSkeleton from '../shared/skeletons/TableSkeleton';
 
 const TableContent = () => {
     const {query, mode, countryId} = useUpdateInfo();
@@ -19,6 +20,7 @@ const TableContent = () => {
     const [pagesInfo, setPagesInfo] = useState<PagesInfo>();
     const [loading, setLoading] = useState(false);
     const [queryNull, setQueryNull] = useState(true);
+    
 
 
     useEffect(() => {
@@ -28,6 +30,7 @@ const TableContent = () => {
 
     useEffect(() => {
         const responseData = async () => {
+            setLoading(true)
             const querypageReal = queryPage !==  0 ? `&page=${queryPage}` : '' ;
             if(query === '') {
                 setQueryNull(true);
@@ -67,11 +70,11 @@ const TableContent = () => {
     <>
         <TableBody>
             {queryNull && <TableRow><TableCell colSpan={7}>Selecciona un filtro para poder visualizar las notas</TableCell></TableRow>}
-            {loading && <TableRow><TableCell>Loading...</TableCell></TableRow>}
+            {loading && <TableSkeleton />}
             {(!loading && data) && data.map((item, index: number) => (
                 <TableRow key={index}>
                     <TableCell>{item.studentName}</TableCell>
-                    <TableCell className="bg-accent/50">{item.grade}</TableCell>
+                    <TableCell >{item.grade}</TableCell>
                     <TableCell>{item.approved === 'S'? 'Si aprovo': 'No aprovo'}</TableCell>
                     <TableCell>{item.courseCode}</TableCell>
                     <TableCell>{item.status}</TableCell>
@@ -87,7 +90,7 @@ const TableContent = () => {
 
             {/** PAGINACION */}
             <Tabs>
-                <TabsList className="grid grid-cols-3 xl:grid-cols-12">
+                <TabsList className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
                     {renderTabs()}
                 </TabsList>
                 

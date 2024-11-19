@@ -49,6 +49,10 @@ interface Props {
 }
 const FiltersForm = ({view}: Props) => {
     const { setQuery, setYearSelected } = useUpdateInfo();
+
+    useEffect(() => {
+        setQuery('');
+    }, [])
     // const t = useTranslations('staffPage');
 
     //Defining the form
@@ -56,10 +60,10 @@ const FiltersForm = ({view}: Props) => {
         resolver: zodResolver(filtersFormSchema),
         defaultValues: defaultValuesFilters,
     })
-    const [error, setErrorForm] = useState('')
-    const [disabled, setDisabled] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [created, setCreated] = useState(false);
+    // const [error, setErrorForm] = useState('')
+    // const [disabled, setDisabled] = useState(false);
+    // const [loading, setLoading] = useState(false);
+    // const [created, setCreated] = useState(false);
 
     async function onSubmit(data: z.infer<typeof filtersFormSchema>) {
         console.log(data)
@@ -77,19 +81,26 @@ const FiltersForm = ({view}: Props) => {
 
     }
 
+    // const { reset } = useForm({ 
+
+    //     defaultValues: filtersFormSchema.parse({}), 
+
+    // });
+
     return (
         <Form {...form}>
-            <Button onClick={
+            {/* <Button onClick={
                 () => {
-                    form.reset(defaultValuesFilters);
+                    // form.reset(defaultValuesFilters);
+                    reset()
                     setQuery('');
                     setYearSelected({selected: false, year: 0});
                 }
             }>
                 Limpiar filtros
-            </Button>
+            </Button> */}
             <form action="" onSubmit={form.handleSubmit(onSubmit)}>
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="grid md:grid-cols-2 gap-4 mb-4 text-black">
                         <FormField
                             control={form.control}
                             name='program'
@@ -164,24 +175,9 @@ const FiltersForm = ({view}: Props) => {
                                 </FormItem>
                             )}
                         />
-                        {/* <FormField
-                            control={form.control}
-                            name='student'
-                            render={({ field }) => (
-                                <FormItem className="w-full mt-6" >
-                                    <FormLabel>
-                                        {t('emailLabel')}
-
-                                    </FormLabel>
-                                    <FormControl>
-                                        
-                                        <SelectItemsPaginated field={field} type='students'/>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        /> */}
-                        <FormField
+                        {view === 'staff' && (<div className='hidden md:block'></div>)}
+                        
+                        <FormField 
                             control={form.control}
                             name='approved'
                             render={({ field }) => (
@@ -202,10 +198,13 @@ const FiltersForm = ({view}: Props) => {
                             )}
                         />
                 </div>
-
-                <Button type='submit'>
+                            <div className='flex md:justify-end '> 
+                            <Button type='submit'>
                     Buscar
                 </Button>
+
+                            </div>
+                
             </form>
         </Form>
     )
