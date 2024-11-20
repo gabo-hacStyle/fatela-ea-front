@@ -34,7 +34,7 @@ const SelectItems =  ({field, type}: Props) => {
                     break;
                 case 'year':
                     
-                    const years = Array.from({ length: 2024 - 1990 + 1 }, (_, i) => 1990 + i);
+                    const years = Array.from({ length: 2024 - 1998 + 1 }, (_, i) => 2024 - i);
                     setData(years);
                     break;
                 case 'country':

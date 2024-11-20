@@ -1,6 +1,7 @@
 'use client';
 import React, {useState, useEffect, use} from 'react'
 import { useUpdateInfo } from '@/hooks/useUpdateInfo';
+import { useGraficoReferenced } from '@/hooks/useReportes';
 import { handleGetQuantityInfo } from '@/actions/gradesActions';
 
 import { useTranslations } from "next-intl";
@@ -17,6 +18,7 @@ interface InfoCardsProps {
 const InfoCards = ({type}: InfoCardsProps) => {
   const t = useTranslations('staffPage');
   const {query, mode, countryId, yearSelected} = useUpdateInfo();
+  const {setTotalStudents} = useGraficoReferenced();
   const [data, setData] = useState<any>(null);
   const [periodo, setPeriodo] = useState<number>();
 
@@ -37,6 +39,7 @@ const InfoCards = ({type}: InfoCardsProps) => {
         switch (type) {
           case 'students':
             setData(response.totalStudents);
+            setTotalStudents(response.totalStudents)
             break;
           case 'courses':
             

@@ -28,12 +28,14 @@ import { useUpdateInfo } from "@/hooks/useUpdateInfo";
 import { handleGetQuantityInfo } from '@/actions/gradesActions';
 import { StudentsCountByConutry } from '@/index';
 import PieGraph from '@/components/shared/skeletons/PieGraph';
+import { useGraficoReferenced } from '@/hooks/useReportes';
 
 interface Props {
   type: string;
 }
 
 export function PieFull({ type }: Props) {
+  const { graficoRef3 } = useGraficoReferenced();
   const t = useTranslations('staffPage');
   const { query, yearSelected, mode, countryId } = useUpdateInfo();
   const [data, setData] = useState<any>(null);
@@ -114,8 +116,9 @@ export function PieFull({ type }: Props) {
     {loading && <PieGraph />}
     {!loading && (
         <ChartContainer
+        ref={graficoRef3}
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square max-h-[750px] md:max-h-[500px]"
         >
           <PieChart>
             <ChartTooltip
@@ -123,6 +126,10 @@ export function PieFull({ type }: Props) {
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie data={chartData} dataKey="qty" nameKey="country" />
+            <ChartLegend
+              content={<ChartLegendContent nameKey="country" />}
+              className="-translate-y-2 flex-wrap gap-1 [&>*]:basis-1/4 [&>*]:justify-center"
+            />
             {/* <LabelList
                 dataKey="country"
                 className="fill-primary"

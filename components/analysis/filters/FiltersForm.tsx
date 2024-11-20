@@ -32,6 +32,7 @@ import SelectItems from './SelectItems';
 // import SelectItemsPaginated from './SelectItemsPaginated';
 import CheckboxItems from './CheckboxItems';
 import { useUpdateInfo } from '@/hooks/useUpdateInfo';
+import { useGraficoReferenced } from '@/hooks/useReportes';
 
 const filtersFormSchema = z.object({
     program: z.string().optional(),
@@ -50,6 +51,9 @@ interface Props {
 const FiltersForm = ({view}: Props) => {
     const t = useTranslations('staffPage');
     const { setQuery, setYearSelected } = useUpdateInfo();
+    const { 
+        setProgram, setCountry, setYear, setStatus, setGender
+    }  = useGraficoReferenced();
 
     useEffect(() => {
         setQuery('');
@@ -68,6 +72,11 @@ const FiltersForm = ({view}: Props) => {
 
     async function onSubmit(data: z.infer<typeof filtersFormSchema>) {
         console.log(data)
+        setProgram(data.program? data.program : null);
+        setCountry(data.countryId? Number(data.countryId) : null);
+        setYear(data.year? Number(data.year) : null);
+        setStatus(data.approved? data.approved : null);
+        
         const filteredData = Object.entries(data).filter(
             ([key, value]) => value !== undefined && value !== ''
           );

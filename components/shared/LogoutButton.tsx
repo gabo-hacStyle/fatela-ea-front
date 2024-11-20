@@ -16,11 +16,13 @@ const LogoutButton = ({position}: LogoutButtonProps) => {
     const router = useRouter();
 
     async function handleLogout() {
+        
+        deleteCookie('token');
+        deleteCookie('user');
+        router.push('/');
         setCountryId(null);
         setMode(null);
         setQuery('');
-        deleteCookie('token');
-        router.push('/');
     }
 
   return (

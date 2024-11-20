@@ -12,6 +12,7 @@ import UserDialog from '@/components/admin/UserDialog'
 import { getTranslations } from 'next-intl/server'
 import { getCookie } from '@/utils/cookiesManager'
 import { getCountries } from '@/services/backend/catalogs'
+import Link from 'next/link'
 
 
 const page = async () => {
@@ -27,7 +28,16 @@ const page = async () => {
         
         <p className='w-3/4'>
           {t('info')}
+          <Link
+          className='block mt-1 text-secondary cursor-pointer underline hover:text-secondary/75'
+          href={'/staff'}
+        >
+          
+            {t('goToStaffPage')}
+         
+        </Link>
         </p>
+       
 
         <UserDialog usage='add' countries={countries} user={null}/>
         

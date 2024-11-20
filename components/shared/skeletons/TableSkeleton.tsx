@@ -5,8 +5,7 @@ import {Table, TableBody, TableCell, TableRow} from '@/components/ui/table'
 const TableSkeleton = () => {
   return (
     <>
-    <Table>
-        <TableBody>
+    
             <TableRow>
                 <TableCell>
                     <Skeleton className="h-6 w-full" />
@@ -28,8 +27,6 @@ const TableSkeleton = () => {
                 </TableCell>
                 
             </TableRow>
-        </TableBody>
-    </Table>
         
 
     </>

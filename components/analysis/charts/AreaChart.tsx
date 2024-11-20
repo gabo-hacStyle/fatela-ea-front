@@ -1,5 +1,5 @@
 "use client"
-
+// import { useRef } from "react"
 import { TrendingUp } from "lucide-react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 
@@ -23,13 +23,14 @@ import { handleGetStudentsByYear } from "@/actions/gradesActions"
 import PieGraph from "@/components/shared/skeletons/PieGraph"
 import { StudentsByYearResponse } from "@/index"
 import { useTranslations } from "next-intl"
-
+import { useGraficoReferenced } from "@/hooks/useReportes"
 
 
 
 
 
 export function AreaChartComponent() {
+  const { graficoRef1, setBetterYear, setWorstYear } = useGraficoReferenced();
     const t = useTranslations('staffPage');
 
     const chartConfig = {
@@ -43,7 +44,7 @@ export function AreaChartComponent() {
         
       } satisfies ChartConfig
 
-    const { query, mode, countryId } = useUpdateInfo();
+    const { mode, countryId } = useUpdateInfo();
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -60,6 +61,15 @@ export function AreaChartComponent() {
                     count: item.count
                 }
             }));
+
+            const bestYear = response.reduce((prev: StudentsByYearResponse, current: StudentsByYearResponse) => {
+                return (prev.count > current.count) ? prev : current
+            })
+            setBetterYear(bestYear.year);
+            const worstYear = response.reduce((prev: StudentsByYearResponse, current: StudentsByYearResponse) => {
+                return (prev.count < current.count) ? prev : current
+            })
+            setWorstYear(worstYear.year);
           }
           setLoading(false);
         };
@@ -67,7 +77,7 @@ export function AreaChartComponent() {
           responseData();
         }, 300)
         // responseData();
-      }, [query, mode, countryId]);
+      }, [ mode, countryId]);
       console.log('data en el area chart', data);
   return (
     <Card>
@@ -82,7 +92,7 @@ export function AreaChartComponent() {
       <CardContent>
         {loading && <PieGraph />}
         {!loading && (
-            <ChartContainer className="aspect-video max-h-[300px] mx-auto" config={chartConfig}>
+            <ChartContainer ref={graficoRef1} className="aspect-16/7 max-h-[300px] mx-auto" config={chartConfig}>
             <AreaChart
               accessibilityLayer
               data={data??[]}

@@ -38,6 +38,7 @@
       "rolesEmpty": "Select at least one role"
     },
     "AdminPage": {
+      "goToStaffPage": "Go to Staff Page",
       "title": "Admin Page",
       "info": "On this page, you have access to the platform's administration. You can view existing users, create users to view reports by assigning specific roles to each user, edit, and delete.",
       "listTitle": "List of users registered on the platform:",
@@ -81,7 +82,7 @@
       "country": "Country",
       "maestria": "Master program",
       "year": "Academic year",
-
+      "reportText": "Before downloading an updated report with the filters, press the search button to update the data",
       "page": "Page",
       "studentsTotal": "Total Students",
       "coursesTotal": "Total Courses",
@@ -108,5 +109,26 @@
       "courseLabel": "Course",
       "statusLabel": "Status",
       "yearLabel": "Year"
+    },
+    "report": {
+      "title": "Fatela Student Report",
+      "country": "Country",
+      "disclaimer": "The data presented below has been extracted from the Fatela q10 database. If there is any inconsistency with the data, it needs to be resolved from the natural source of the data.",
+      "generalReportLabel": "General Report",
+      "info": "Active students per year in the institution (historical)",
+      "graph1Label": "Active students per year in the institution (historical)",
+      "graph2Label": "Student gender distribution",
+      "graph3Label": "Student distribution by country",
+      "mostYear": "The year with the most active students in the institution has been:",
+      "lessYear": "The year with the least active students in the institution has been:",
+      "specificReportLabel": "Specific report (based on your search filters)",
+      "genderLabel": "Gender",
+      "approvedLabel": "Approved",
+      "totalStudentsLabel": "Total students:",
+      "emptyLabel": "Not specified"
+    },
+    "unauthorized": {
+      "title": "Unauthorized Access",
+      "message": "You do not have permission to access this page. Please contact an administrator for access."
     }
 }

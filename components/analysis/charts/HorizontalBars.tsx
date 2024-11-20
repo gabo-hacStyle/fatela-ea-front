@@ -28,8 +28,10 @@ import { useUpdateInfo } from "@/hooks/useUpdateInfo";
 import { handleGetQuantityInfo } from '@/actions/gradesActions';
 import PieGraph from '@/components/shared/skeletons/PieGraph';
 import BarsGraph from '@/components/shared/skeletons/BarsGraph';
+import { useGraficoReferenced } from '@/hooks/useReportes';
 
 export function HorizontalBars() {
+  const { graficoRef2 } = useGraficoReferenced();
   const t = useTranslations('staffPage');
   const { query, yearSelected, mode, countryId } = useUpdateInfo();
   const [data, setData] = useState<any>(null);
@@ -80,7 +82,7 @@ export function HorizontalBars() {
       <CardContent>
         {loading && <div className="flex justify-center"><BarsGraph /></div>}
         {!loading &&  (
-        <ChartContainer config={chartConfig} className="mx-auto aspect-video max-h-[250px]">
+        <ChartContainer ref={graficoRef2} config={chartConfig} className="mx-auto aspect-16/7 max-h-[250px]">
           <BarChart
             accessibilityLayer
             data={chartData}

@@ -29,6 +29,7 @@ import { getTranslations } from "next-intl/server";
 import { handleGetStudents } from "@/actions/catalogsActions";
 import { AreaChart } from "lucide-react";
 import { AreaChartComponent } from "@/components/analysis/charts/AreaChart";
+import GeneratePDF from "@/components/reportes/GeneratePDF";
 const page = async () => {
   const t = await getTranslations("staffPage");
 
@@ -57,9 +58,7 @@ const page = async () => {
       <h1 className="text-center text-2xl my-8">
       {t('headingAnalisys')}
       </h1>
-      <Button> 
-        {t('btnReport')}
-      </Button>
+      <GeneratePDF countriesList={undefined}/>
         <section
           className="grid md:grid-cols-2 gap-5"
           id="numbersPart"

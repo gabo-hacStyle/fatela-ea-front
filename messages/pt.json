@@ -41,6 +41,7 @@
       "serverError": "Erro no servidor. Espere alguns minutos"
     },
     "AdminPage": {
+      "goToStaffPage": "Ir para a página de funcionários",
       "title": "Página de administrador",
       "info": "Nesta página você tem acesso à administração de acesso à plataforma. Você pode visualizar os usuários existentes, criar usuários para visualizar os relatórios atribuindo papéis específicos a cada usuário, editar e excluir.",
       "listTitle": "Lista de usuários registrados na plataforma:",
@@ -78,7 +79,7 @@
       "header": "Acesso de funcionário",
       "filtersTitle": "Seção de filtros",
       "select": "Filtrar por ",
-
+      "reportText": "Antes de baixar um relatorio atualizado com os filtros, aperta o botão de pesquisa para atualizar os dados",
       "programs": "programas",
       "courses": "cursos",
       "students": "estudantes",
@@ -113,11 +114,32 @@
         "notApprovedLabel": "Não aprovado",
 
       "courseLabel": "Curso",
+      "gradeLabel": "Nota",
 
        "statusLabel": "Status",
 
         "yearLabel": "Ano"
-
       
+    },
+    "report": {
+      "title": "Relatório de estudantes da Fatela",
+      "country": "País",
+      "discarding": "Os dados apresentados a seguir foram extraídos do banco de dados do q10 da Fatela. Se houver alguma incongruência com os dados, é necessário resolvê-la na fonte original dos dados.",
+      "generalReportLabel": "Relatório geral",
+      "info": "Estudantes ativos por ano na instituição (histórico)",
+      "graph1Label": "Estudantes ativos por ano na instituição (histórico)",
+      "graph2Label": "Distribuição de gênero dos estudantes",
+      "graph3Label": "Distribuição de estudantes por país",
+      "mostyear": "O ano com mais estudantes ativos na instituição foi:",
+      "lessyear": "O ano com menos estudantes ativos na instituição foi:",
+      "especificReportLabel": "Relatório específico (com base nos seus filtros de busca)",
+      "genderLabel": "Gênero",
+      "approvedLabel": "Aprovados",
+      "totalStudentsLabel": "Total de estudantes:",
+      "emptyLabel": "Não especificado"
+    },
+    "unauthorized": {
+      "title": "Acesso não autorizado",
+      "message": "Você não tem permissão para acessar esta página. Por favor, entre em contato com o administrador do sistema."
     }
 }

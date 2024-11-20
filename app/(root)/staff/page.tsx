@@ -41,6 +41,7 @@ import {  handleGetQuantityInfo, handleGetStudentsByYear } from "@/actions/grade
 import TableContent from "@/components/analysis/TableContent";
 import ClientStateSetter from "@/components/hidden/ClientStateSetter";
 import { AreaChartComponent } from "@/components/analysis/charts/AreaChart";
+import GeneratePDF from "@/components/reportes/GeneratePDF";
 
 
 const page = async () => {
@@ -49,7 +50,7 @@ const page = async () => {
   // await handleGetCourses();
   // await handleGetStudents();
   await handleGetPrograms();
-  await handleGetCountries();
+  const countriesList = await handleGetCountries();
   await handleGetQuantityInfo(null, 'staff', null);
   await handleGetStudentsByYear(null)
   // await handleGetGradesFiltered(null);
@@ -80,6 +81,7 @@ const page = async () => {
         <h1 className="text-center text-2xl my-8">
           {t('headingAnalisys')}
         </h1>
+        <GeneratePDF  countriesList={countriesList}/>
         <section
           className="grid md:grid-cols-2  gap-5"
           id="numbersPart"
@@ -107,7 +109,7 @@ const page = async () => {
             <div>
               <AreaChartComponent />
             </div>
-            <div className="grid md:grid-cols-2 gap-5">
+            <div className="grid lg:grid-cols-2 gap-5">
             <PieFull type={"genders"} />
             <HorizontalBars />
             </div>

@@ -40,6 +40,7 @@
       "serverError": "Error en el servidor. Toca esperar unos minutos"
     },
     "AdminPage": {
+      "goToStaffPage": "Ir a la pagina de funcionarios",
       "title": "Pagina de administrador ",
       "info": "En esta pagina tienes acceso a la admisinstracion de acceso a la plataforma. Puedes visualizar los usuarios existentes, crear usuarios para visualizar los reportes asignando roles especificos a cada usuario, editar y eliminar.",
       "listTitle": "Lista de usuarios registrados en la plataforma:",
@@ -86,7 +87,7 @@
       "maestria": "Programa de maestría",
       
 
-
+      "reportText": "Antes de descargar un reporte actualizado con los filtros, presiona el botón de búsqueda para actualizar los datos",
       "page": "Pagina",
       "studentsTotal": "Total de estudiantes",
       "coursesTotal": "Total de cursos",
@@ -115,5 +116,26 @@
       "yearLabel": "Año"
       
 
+    }, 
+    "report": {
+      "title": "Reporte de estudiantes de Fatela",
+      "country": "Pais",
+      "discarding:": "Los datos presentados a continuación han sido extraídos de la base de datos de q10 de Fatela. Si se presenta alguna incongruencia con los datos, es necesario solucionarlo desde la fuente natural de los datos.",
+      "generalReportLabel": "Reporte general",
+      "info": "Estudiantes activos por año en la institución (histórico)",
+      "graph1Label": "Estudiantes activos por año en la institución (histórico)",
+      "graph2Label": "Distribución de género de estudiantes",
+      "graph3Label": "Distribución de estudiantes por país",
+      "mostyear": "El año con mas estudiantes activos en la institucion ha sido:",
+      "lessyear": "El año con menos estudiantes activos en la institucion ha sido:",
+      "especificReportLabel": "Reporte especifico (en base a sus filtros de busqueda)",
+      "genderLabel": "Género",
+      "approvedLabel": "Aprobados",
+      "totalStudentsLabel": "Total de estudiantes:",
+      "emptyLabel": "No especificado"
+    },
+    "unauthorized": {
+      "title": "Acceso no autorizado",
+      "message": "No tienes permisos para acceder a esta página. Por favor, contacta a un administrador para obtener acceso."
     }
 }

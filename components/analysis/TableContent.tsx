@@ -33,7 +33,7 @@ const TableContent = () => {
 
     useEffect(() => {
         const responseData = async () => {
-            setLoading(true)
+            
             const querypageReal = queryPage !==  0 ? `&page=${queryPage}` : '' ;
             if(query === '') {
                 setQueryNull(true);
@@ -78,7 +78,7 @@ const TableContent = () => {
                 <TableRow key={index}>
                     <TableCell>{item.studentName}</TableCell>
                     <TableCell >{item.grade}</TableCell>
-                    <TableCell>{item.approved === 'S'? `${t('approvedLabel')}`: `${'notApprovedLabel'}`}</TableCell>
+                    <TableCell>{item.approved === 'S'? `${t('approvedLabel')}`: `${t('notApprovedLabel')}`}</TableCell>
                     <TableCell>{item.courseCode}</TableCell>
                     <TableCell>{item.status}</TableCell>
                     <TableCell>{item.year}</TableCell>
