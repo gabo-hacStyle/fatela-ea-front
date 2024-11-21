@@ -56,6 +56,8 @@ export function HorizontalBars() {
     responseData();
   }, [query, mode, countryId]);
 
+  console.log('data en el maldito bars',data)
+
   const chartConfig = {
     males: {
       label: t('labelMen'),
@@ -80,7 +82,7 @@ export function HorizontalBars() {
         </CardTitle>
         <CardDescription>{t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}</CardDescription>
       </CardHeader>
-      <CardContent className="flex items-center">
+      <CardContent>
         {loading && <div className="flex justify-center"><BarsGraph /></div>}
         {!loading &&  (
         <ChartContainer ref={graficoRef2} config={chartConfig} className=" mx-auto aspect-16/7 max-h-[250px]">
