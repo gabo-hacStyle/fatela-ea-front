@@ -45,7 +45,7 @@ const GeneratePDF = ({countriesList}: Props) => {
             const date = new Date().toLocaleDateString(`en-GB`);
             doc.setFontSize(10);
             doc.text(`${date}`, 10, 10);
-            doc.text(`Page ${pageNumber}`, doc.internal.pageSize.getWidth() - 40, doc.internal.pageSize.getHeight() - 20);
+            doc.text(`${t('page')} ${pageNumber}`, doc.internal.pageSize.getWidth() - 40, doc.internal.pageSize.getHeight() - 20);
           };
     
           html2canvas(graph1).then(canvas1 => {
