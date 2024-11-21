@@ -1,3 +1,5 @@
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react'
 import {
     Select,
@@ -26,25 +28,23 @@ const SelectItems =  ({field, type}: Props) => {
     useEffect(() => {
         const fetchData = async () => {
             switch (type) {
-                case 'program':
+                case 'program':{
                     const programs = await handleGetPrograms();
                     if(programs) {
                         setData(programs)
                     }
-                    break;
-                case 'year':
+                    break;}
+                case 'year':{
                     
                     const years = Array.from({ length: 2024 - 1998 + 1 }, (_, i) => 2024 - i);
                     setData(years);
-                    break;
-                case 'country':
+                    break;}
+                case 'country':{
                     const countries = await handleGetCountries();
                     if(countries) {
                         setData(countries)
                     }
-                    break;
-                default:
-                    break;
+                    break;}
             }
         }
         fetchData()

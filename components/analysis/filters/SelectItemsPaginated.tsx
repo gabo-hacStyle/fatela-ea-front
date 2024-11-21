@@ -1,3 +1,5 @@
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React, {useEffect, useState} from 'react'
 
@@ -53,16 +55,14 @@ const SelectItemsPaginated = ({field, type}: SelectItemsProps) => {
     const asyncGetData = async () => {
       setLoading(true);
       switch (type) {
-        case 'courses':
+        case 'courses':{
           const cr = await handleGetCourses();
           setData(cr);
-          break;
-        case 'students':
+          break;}
+        case 'students':{
           const st = await handleGetStudents();
           setData(st);
-          break;
-        default:
-          break;
+          break;}
       }
       setLoading(false);
 

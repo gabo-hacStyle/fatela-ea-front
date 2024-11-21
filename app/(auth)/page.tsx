@@ -4,11 +4,13 @@ import React from 'react'
 import {Card, CardContent} from '@/components/ui/card';
 
 //internacionalizacion
-import {useTranslations} from 'next-intl';
+// import {useTranslations} from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+// import { useTranslations } from 'next-intl';
 
-const page = () => {
-  const t = useTranslations('LoginPage');
+const page = async () => {
+  const t = await getTranslations('LoginPage');
   return (
     <div className="my-20">
     <h1 className="font-bold text-center text-5xl italic">AnReHis</h1>
