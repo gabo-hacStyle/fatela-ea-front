@@ -56,7 +56,7 @@ const GeneratePDF = ({countriesList}: Props) => {
             if (!graph3) {
               doc.text(`${u(`country`)}:`, doc.internal.pageSize.getWidth() / 2, 25, { align: `center` });
             }
-            doc.text(`${u('discarding')}`, 10, 40, { maxWidth: doc.internal.pageSize.getWidth() - 20 });
+            doc.text(`${u('disclaimer')}`, 10, 40, { maxWidth: doc.internal.pageSize.getWidth() - 20 });
     
             doc.setFontSize(12);
             doc.text(`${u('generalReportLabel')}`, 10, 55);

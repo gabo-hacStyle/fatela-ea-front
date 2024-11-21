@@ -127,7 +127,7 @@
     "report": {
       "title": "Relatório de estudantes da Fatela",
       "country": "País",
-      "discarding": "Os dados apresentados a seguir foram extraídos do banco de dados do q10 da Fatela. Se houver alguma incongruência com os dados, é necessário resolvê-la na fonte original dos dados.",
+      "disclaimer": "Os dados apresentados a seguir foram extraídos do banco de dados do q10 da Fatela. Se houver alguma incongruência com os dados, é necessário resolvê-la na fonte original dos dados.",
       "generalReportLabel": "Relatório geral",
       "info": "Estudantes ativos por ano na instituição (histórico)",
       "graph1Label": "Estudantes ativos por ano na instituição (histórico)",
