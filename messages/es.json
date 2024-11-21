@@ -85,7 +85,9 @@
       "year": "Año academico",
       "country": "Pais",
       "maestria": "Programa de maestría",
-      
+      "filterProgram": "maestria",
+      "filterYear": "año",
+      "filterCountry": "pais",
 
       "reportText": "Antes de descargar un reporte actualizado con los filtros, presiona el botón de búsqueda para actualizar los datos",
       "page": "Pagina",

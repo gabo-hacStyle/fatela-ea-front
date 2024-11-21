@@ -87,7 +87,7 @@ const SelectItems =  ({field, type}: Props) => {
   return (
     <Select  defaultValue={field.value} onValueChange={handleSelectChange}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder={`${t('select')} ${type}`} />
+                  <SelectValue placeholder={`${t('select')} ${type === 'country' ? t('filterCountry') : type === 'program' ? t('filterProgram') : t('filterYear')}`} />
                 </SelectTrigger>
                 <SelectContent >
                   {renderSelectItems()}

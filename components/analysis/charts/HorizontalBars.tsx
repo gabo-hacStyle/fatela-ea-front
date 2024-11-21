@@ -79,10 +79,10 @@ export function HorizontalBars() {
         </CardTitle>
         <CardDescription>{t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex items-center">
         {loading && <div className="flex justify-center"><BarsGraph /></div>}
         {!loading &&  (
-        <ChartContainer ref={graficoRef2} config={chartConfig} className="mx-auto aspect-16/7 max-h-[250px]">
+        <ChartContainer ref={graficoRef2} config={chartConfig} className=" mx-auto aspect-16/7 max-h-[250px]">
           <BarChart
             accessibilityLayer
             data={chartData}
@@ -93,12 +93,12 @@ export function HorizontalBars() {
           >
             <CartesianGrid horizontal={false} />
             <YAxis
-              dataKey="gender"
+              dataKey="gender"  
               type="category"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => value}
+              tickFormatter={(value) => value.slice(0, 1)}
             />
             <XAxis dataKey='num' type="number" />
             <ChartTooltip
@@ -111,13 +111,13 @@ export function HorizontalBars() {
               fill="hsl(var(--chart-1))"
               radius={4}
             >
-              <LabelList
+              {/* <LabelList
                 dataKey="gender"
                 position="insideLeft"
                 offset={8}
                 className="fill-black"
                 fontSize={12}
-              />
+              /> */}
               <LabelList
                 dataKey="num"
                 position="right"

@@ -86,6 +86,9 @@
       "maestria": "Programas de mestrado",
       "country": "País",
       "year": "Ano eletivo",
+      "filterProgram": "mestrado",
+      "filterYear": "ano",
+      "filterCountry": "país",
 
       "page": "Página",
       "studentsTotal": "Total de estudantes",
