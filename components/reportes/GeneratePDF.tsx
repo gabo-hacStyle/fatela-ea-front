@@ -82,7 +82,7 @@ const GeneratePDF = ({countriesList}: Props) => {
               
               doc.text(`${t('maestria')}: ${program || `${u('emptyLabel')}`}`, 20, 40);
               doc.text(`${t('year')}: ${year || `${u('emptyLabel')}`}`, 20, 45);
-              doc.text(`${u('genderLabel')}: ${gender || `${u('emptyLabel')}`}`, 20, 50);
+              doc.text(`${u('genderLabel')}: ${gender === 'Masculino' ? t('labelMen') : gender === 'Femenino' ?t('labelWomen') : `${u('emptyLabel')}`}`, 20, 50);
               doc.text(`${u('approvedLabel')} ${status === 'S' ? 'Si aprovados' : status === 'N' ? 'No aprovados' : `${u('emptyLabel')}`}`, 20, 55);
               if (graph3) {
                 doc.text(`${u('country')}: ${countryToRender? countryToRender : `${u('emptyLabel')}`}`, 20, 60);

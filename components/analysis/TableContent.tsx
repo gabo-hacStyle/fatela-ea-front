@@ -13,6 +13,7 @@ import { Note, PagesInfo } from '@/index';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import TableSkeleton from '../shared/skeletons/TableSkeleton';
 import { useTranslations } from 'use-intl';
+import { X } from 'lucide-react';
 
 const TableContent = () => {
     const t = useTranslations('staffPage');
@@ -23,6 +24,8 @@ const TableContent = () => {
     const [pagesInfo, setPagesInfo] = useState<PagesInfo>();
     const [loading, setLoading] = useState(false);
     const [queryNull, setQueryNull] = useState(true);
+
+    const [openInfo, setOpenInfo] = useState(false);
     
 
 
@@ -68,7 +71,26 @@ const TableContent = () => {
           </TabsTrigger>
         ));
       };
-      console.log(data)
+    // const renderStudents = (code:string, email: string | null ) => {
+    //     return (
+    //         <>
+    //         <X onClick={() => setOpenInfo(false)}/>
+    //             <span className='block'>Codigo: {code}</span>
+    //             <span className='block'>Email: {email ? email : 'No registra'}</span>
+
+    //         </>
+    //     )
+    // }
+    // const renderCourses = (program:string, teacher: string | null ) => {
+    //     return (
+    //         <>
+    //         <X onClick={() => setOpenInfo(false)}/>
+    //             <span className='block'>Programa: {program}</span>
+    //             <span className='block'>Profesor: {teacher ? teacher : 'No registra'}</span>
+    //         </>
+    //     )
+    // }
+    //   console.log(data)
   return (
     <>
         <TableBody>
@@ -76,10 +98,19 @@ const TableContent = () => {
             {loading && <TableSkeleton />}
             {(!loading && data) && data.map((item, index: number) => (
                 <TableRow key={index}>
-                    <TableCell>{item.studentName}</TableCell>
+                    <TableCell onClick={() => setOpenInfo(true)}>
+                        {item.studentName}
+                        <span className='block'>{t('codeLabel')}: {item.studentCode}</span>
+                        <span className='block'>{t('emailLabel')}: {item.studentEmail ? item.studentEmail : t('nullValue')}</span>
+
+                    </TableCell>
                     <TableCell >{item.grade}</TableCell>
                     <TableCell>{item.approved === 'S'? `${t('approvedLabel')}`: `${t('notApprovedLabel')}`}</TableCell>
-                    <TableCell>{item.courseCode}</TableCell>
+                    <TableCell onClick={() => setOpenInfo(true)}>
+                        {item.courseCode}
+                        <span className='block'> {t('maestria')}: {item.courseProgram}</span>
+                <span className='block'>{t('teacherLabel')}: {item.courseTeacher ? item.courseTeacher :  t('nullValue')}</span>
+                    </TableCell>
                     <TableCell>{item.status}</TableCell>
                     <TableCell>{item.year}</TableCell>
                 </TableRow>

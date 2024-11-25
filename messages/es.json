@@ -40,6 +40,7 @@
       "serverError": "Error en el servidor. Toca esperar unos minutos"
     },
     "AdminPage": {
+      "goToCoordinatorPage": "Ir a la pagina de coordinador",
       "goToStaffPage": "Ir a la pagina de funcionarios",
       "title": "Pagina de administrador ",
       "info": "En esta pagina tienes acceso a la admisinstracion de acceso a la plataforma. Puedes visualizar los usuarios existentes, crear usuarios para visualizar los reportes asignando roles especificos a cada usuario, editar y eliminar.",
@@ -73,6 +74,11 @@
       "deleteWarn": "¿Estas seguro que deseas eliminar al usuario con el email:"
     }, 
     "staffPage": {
+      "teacherLabel": "Profesor",
+      "codeLabel": "Código",
+      "emailLabel":"Correo electrónico",
+      "nullValue": "No registra",
+
       "btnReport": "Descargar Reporte",
       "btnSearch": "Buscar",
       "header": "Acceso de funcionario",

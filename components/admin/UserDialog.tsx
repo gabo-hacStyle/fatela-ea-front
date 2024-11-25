@@ -84,7 +84,7 @@ const UserDialog = ({usage, user, countries}: UserDialogProps) => {
       
         {
           usage === 'edit' ? (
-            <DialogContent>
+            <DialogContent className="w-[90%] mx-auto">
           <DialogHeader>
             {user && (<DialogTitle> {t('editUserTitle')} {user.email}</DialogTitle>)}
                     
@@ -92,7 +92,7 @@ const UserDialog = ({usage, user, countries}: UserDialogProps) => {
                   <UsersForm user={user} usage='edit' countries={countries} />
                 </DialogContent>
           ) : (
-            <DialogContent>
+            <DialogContent className="w-[90%] mx-auto">
             <DialogHeader>
           <DialogTitle>{t('newUsertitle')}</DialogTitle>
         </DialogHeader>

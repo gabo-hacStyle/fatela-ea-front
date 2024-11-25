@@ -38,6 +38,7 @@
       "rolesEmpty": "Select at least one role"
     },
     "AdminPage": {
+      "goToCoordinatorPage": "Go to Coordinator Page",
       "goToStaffPage": "Go to Staff Page",
       "title": "Admin Page",
       "info": "On this page, you have access to the platform's administration. You can view existing users, create users to view reports by assigning specific roles to each user, edit, and delete.",
@@ -70,6 +71,10 @@
       "deleteWarn": "Are you sure you want to delete the user with the email:"
     },
     "staffPage": {
+      "teacherLabel": "Teacher",
+      "codeLabel": "Code",
+      "emailLabel": "Email",
+      "nullValue": "Not registered",
       "btnReport": "Download Report",
       "btnSearch": "Search",
       "header": "Staff Access",
@@ -122,9 +127,9 @@
       "graph1Label": "Active students per year in the institution (historical)",
       "graph2Label": "Student gender distribution",
       "graph3Label": "Student distribution by country",
-      "mostYear": "The year with the most active students in the institution has been:",
-      "lessYear": "The year with the least active students in the institution has been:",
-      "specificReportLabel": "Specific report (based on your search filters)",
+      "mostyear": "The year with the most active students in the institution has been:",
+      "lessyear": "The year with the least active students in the institution has been:",
+      "especificReportLabel": "Specific report (based on your search filters)",
       "genderLabel": "Gender",
       "approvedLabel": "Approved",
       "totalStudentsLabel": "Total students:",

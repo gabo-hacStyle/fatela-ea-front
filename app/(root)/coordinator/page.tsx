@@ -24,10 +24,10 @@ import ClientStateSetter from "@/components/hidden/ClientStateSetter";
 import InfoCards from "@/components/analysis/InfoCards";
 import { HorizontalBars } from "@/components/analysis/charts/HorizontalBars";
 import FiltersForm from "@/components/analysis/filters/FiltersForm";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { getTranslations } from "next-intl/server";
-import { handleGetStudents } from "@/actions/catalogsActions";
-import { AreaChart } from "lucide-react";
+// import { handleGetStudents } from "@/actions/catalogsActions";
+// import { AreaChart } from "lucide-react";
 import { AreaChartComponent } from "@/components/analysis/charts/AreaChart";
 import GeneratePDF from "@/components/reportes/GeneratePDF";
 const page = async () => {
@@ -77,10 +77,10 @@ const page = async () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>
+             
                 {/* {t("coursesTotal")} {'('} {t("timeDefault")} {')'} */}
                 <CardTitle>{t("coursesTotal")} {'('} {t("timeDefault")} {')'}</CardTitle>
-                </CardTitle>
+               
             </CardHeader>
             <CardContent>
               <InfoCards type={"courses"} />
@@ -88,7 +88,7 @@ const page = async () => {
           </Card>
         </section>
         
-          <section className="grid grid-cols-2 gap-5">
+          <section className="grid lg:grid-cols-2 gap-5">
             <AreaChartComponent />
             <HorizontalBars />
           </section>

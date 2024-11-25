@@ -77,6 +77,7 @@ const FiltersForm = ({view}: Props) => {
         setCountry(data.countryId? Number(data.countryId) : null);
         setYear(data.year? Number(data.year) : null);
         setStatus(data.approved? data.approved : null);
+        setGender(data.gender? data.gender : null);
         
         const filteredData = Object.entries(data).filter(
             ([key, value]) => value !== undefined && value !== ''

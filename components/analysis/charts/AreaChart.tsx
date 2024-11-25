@@ -35,7 +35,7 @@ export function AreaChartComponent() {
     const t = useTranslations('staffPage');
 
     const chartConfig = {
-        count: {
+        num: {
           
           color: "hsl(var(--chart-1))",
         }, 
@@ -59,7 +59,7 @@ export function AreaChartComponent() {
             setData(response.map((item: StudentsByYearResponse) => {
                 return {
                     year: String(item.year),
-                    count: item.count
+                    num: item.count
                 }
             }));
 
@@ -79,7 +79,7 @@ export function AreaChartComponent() {
         }, 300)
         // responseData();
       }, [ mode, countryId]);
-      console.log('data en el area chart', data);
+      // console.log('data en el area chart', data);
   return (
     <Card>
       <CardHeader>
@@ -112,15 +112,15 @@ export function AreaChartComponent() {
               />
               <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
               <defs>
-                <linearGradient id="fillCount" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="fillNum" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
-                    stopColor="var(--color-count)"
+                    stopColor="var(--color-num)"
                     stopOpacity={0.8}
                   />
                   <stop
                     offset="95%"
-                    stopColor="var(--color-count)"
+                    stopColor="var(--color-num)"
                     stopOpacity={0.1}
                   />
                 </linearGradient>
@@ -128,11 +128,11 @@ export function AreaChartComponent() {
               </defs>
               
               <Area
-                dataKey="count"
+                dataKey="num"
                 type="natural"
-                fill="url(#fillCount)"
+                fill="url(#fillNum)"
                 fillOpacity={0.4}
-                stroke="var(--color-count)"
+                stroke="var(--color-num)"
                 stackId="a"
                 label="year"
               />

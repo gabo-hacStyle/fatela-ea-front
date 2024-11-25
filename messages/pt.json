@@ -41,6 +41,7 @@
       "serverError": "Erro no servidor. Espere alguns minutos"
     },
     "AdminPage": {
+      "goToCoordinatorPage": "Ir para a página de coordenador",
       "goToStaffPage": "Ir para a página de funcionários",
       "title": "Página de administrador",
       "info": "Nesta página você tem acesso à administração de acesso à plataforma. Você pode visualizar os usuários existentes, criar usuários para visualizar os relatórios atribuindo papéis específicos a cada usuário, editar e excluir.",
@@ -74,6 +75,10 @@
       "rolesEmpty": "Selecione pelo menos um papel"
     },
     "staffPage": {
+      "teacherLabel": "Professor",
+      "codeLabel": "Código",
+      "emailLabel": "Correio eletrônico",
+      "nullValue": "Não registrado",
       "btnReport": "Baixar Relatório",
       "btnSearch": "Pesquisar",
       "header": "Acesso de funcionário",

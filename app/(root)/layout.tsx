@@ -6,12 +6,16 @@ import { getCookie } from '@/utils/cookiesManager'
 import { User } from '@/index';
 import {Badge} from '@/components/ui/badge'
 import { getTranslations } from 'next-intl/server';
-
+import { headers } from 'next/headers';
 
 
 
 const layout = async({children}: Readonly<{children: React.ReactNode}>) => {
-    const t = await getTranslations('shared');
+    
+  const headersList = await headers();
+  const pathname = headersList.get('x-pathname');
+
+  const t = await getTranslations('shared');
 
     const user = await getCookie('user');
     const userJson = JSON.parse(user? user : '') as User;
@@ -30,11 +34,14 @@ const layout = async({children}: Readonly<{children: React.ReactNode}>) => {
           <div className="flex items-center justify-between">
             <h1 className="text-4xl text-left font-semibold">
                   {/*Condicionando texto*/ }
-                  {rolesList.includes('ADMIN') ? 
+                  {
+                  // rolesList.includes('ADMIN') ? 
                   // t('admin') 
+                  pathname === '/admin' ?
                   `${t('adminTitle')} `
                   : 
-                  rolesList.includes('STAFF') ? 
+                  // rolesList.includes('STAFF') ? 
+                  pathname === '/staff' ?
                   // t('coordinator') 
                   `${t('staffTitle')} `
                   : 

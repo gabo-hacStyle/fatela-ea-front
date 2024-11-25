@@ -21,28 +21,6 @@ export function middleware(request: NextRequest) {
   if (user) {
     const userData = JSON.parse(user) as User;
     const roles = userData.roles;
-    // const roles = userData.roles.map((role: string) => role);
-
-    // if (roles.includes('ADMIN')) {
-    //   if (url.pathname !== '/admin') {
-    //     url.pathname = '/admin';
-    //     return NextResponse.redirect(url);
-    //   }
-    // } else if (roles.includes('STAFF')) {
-    //   if (url.pathname !== '/staff') {
-    //     url.pathname = '/staff';
-    //     return NextResponse.redirect(url);
-    //   }
-    // } else if (roles.includes('COORDINATOR')) {
-    //   if (url.pathname !== '/coordinator') {
-    //     url.pathname = '/coordinator';
-    //     return NextResponse.redirect(url);
-    //   }
-    // } else {
-    //   // Si el rol no es reconocido, redirigir al login
-    //   url.pathname = '/';
-    //   return NextResponse.redirect(url);
-    // }
   
 
   // Bloquear acceso a páginas no autorizadas
@@ -60,7 +38,15 @@ export function middleware(request: NextRequest) {
   }
 }
 
-  return NextResponse.next();
+const requestHeaders = new Headers(request.headers);
+requestHeaders.set('x-pathname', request.nextUrl.pathname);
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    }
+    
+  });
 }
 
 export const config = {

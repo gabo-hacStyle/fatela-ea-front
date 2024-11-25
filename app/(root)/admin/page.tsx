@@ -36,6 +36,14 @@ const page = async () => {
             {t('goToStaffPage')}
          
         </Link>
+        <Link
+          className='block mt-1 text-secondary cursor-pointer underline hover:text-secondary/75'
+          href={'/coordinator'}
+        >
+          
+            {t('goToCoordinatorPage')}
+         
+        </Link>
         </p>
        
 
@@ -69,7 +77,7 @@ const page = async () => {
                         {t('countryLabel')}: {user.country.countryName}
                       </p>
                     </CardHeader>
-                    <CardContent className='flex gap-5'>
+                    <CardContent className='flex flex-col md:flex-row gap-5'>
                     <UserDialog usage='edit'   countries={countries} user={user} />
                     <UserDialog usage='delete' countries={countries} user={user} />
                     </CardContent>
