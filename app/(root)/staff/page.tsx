@@ -36,8 +36,8 @@ import InfoCards from "@/components/analysis/InfoCards";
 import { PieFull } from "@/components/analysis/charts/PieFull";
 import { getTranslations } from "next-intl/server";
 import { HorizontalBars } from "@/components/analysis/charts/HorizontalBars";
-import { handleGetCountries, handleGetPrograms, handleGetCourses, handleGetStudents } from "@/actions/catalogsActions";
-import {  handleGetQuantityInfo, handleGetStudentsByYear } from "@/actions/gradesActions";
+import { handleGetCountries, handleGetPrograms, } from "@/actions/catalogsActions";
+import {  handleGetQuantityInfo } from "@/actions/gradesActions";
 import TableContent from "@/components/analysis/TableContent";
 import ClientStateSetter from "@/components/hidden/ClientStateSetter";
 import { AreaChartComponent } from "@/components/analysis/charts/AreaChart";
@@ -52,7 +52,7 @@ const page = async () => {
   await handleGetPrograms();
   const countriesList = await handleGetCountries();
   await handleGetQuantityInfo(null, 'staff', null);
-  await handleGetStudentsByYear(null)
+ 
   // await handleGetGradesFiltered(null);
 
 
@@ -95,14 +95,14 @@ const page = async () => {
             </CardContent>
           </Card>
 
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle>{t("coursesTotal")} {'('} {t("timeDefault")} {')'}</CardTitle>
             </CardHeader>
-            <CardContent>
+            {/* <CardContent>
               <InfoCards type={"courses"} />
-            </CardContent>
-          </Card>
+            </CardContent> 
+          </Card> */}
         </section>
         
           <section className="grid gap-5" >

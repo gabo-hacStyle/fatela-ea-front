@@ -58,44 +58,52 @@ const GeneratePDF = ({countriesList}: Props) => {
             }
             doc.text(`${u('disclaimer')}`, 10, 40, { maxWidth: doc.internal.pageSize.getWidth() - 20 });
     
-            doc.setFontSize(12);
-            doc.text(`${u('generalReportLabel')}`, 10, 55);
-            doc.setFontSize(10);
-            doc.text(`${u('info')}:`, 10, 60);
+            // doc.setFontSize(12);
+            // doc.text(`${u('generalReportLabel')}`, 10, 55);
+            // doc.setFontSize(10);
+            // doc.text(`${u('info')}:`, 10, 60);
     
-            let yPosition = addImageToPDF(canvas1, 80, false);
-            
-            yPosition += 10;
-            doc.text(`${u('graph1Label')}`, doc.internal.pageSize.getWidth() / 2, yPosition, { align: `center` });
-            yPosition += 10;
-            doc.text(`${u('mostyear')} ${betterYear}`, 10, yPosition);
-            yPosition += 5;
-            doc.text(`${u('lessyear')} ${worstYear}`, 10, yPosition);
+           
            
     
             html2canvas(graph2).then(canvas2 => {
-              doc.addPage();
-              addHeaderAndFooter(2);
+              
+              
+              
               doc.setFontSize(12);
-              doc.text(`${u('especificReportLabel')} : `, 10, 30);
+              doc.text(`${u('especificReportLabel')} : `, 10, 50);
               doc.setFontSize(10);
               
-              doc.text(`${t('maestria')}: ${program || `${u('emptyLabel')}`}`, 20, 40);
-              doc.text(`${t('year')}: ${year || `${u('emptyLabel')}`}`, 20, 45);
-              doc.text(`${u('genderLabel')}: ${gender === 'Masculino' ? t('labelMen') : gender === 'Femenino' ?t('labelWomen') : `${u('emptyLabel')}`}`, 20, 50);
-              doc.text(`${u('approvedLabel')} ${status === 'S' ? 'Si aprovados' : status === 'N' ? 'No aprovados' : `${u('emptyLabel')}`}`, 20, 55);
+              doc.text(`${t('maestria')}: ${program || `${u('emptyLabel')}`}`, 20, 60);
+              doc.text(`${t('year')}: ${year || `${u('emptyLabel')}`}`, 20, 65);
+              doc.text(`${u('genderLabel')}: ${gender === 'Masculino' ? t('labelMen') : gender === 'Femenino' ?t('labelWomen') : `${u('emptyLabel')}`}`, 20, 70);
+              doc.text(`${u('approvedLabel')} ${status === 'S' ? 'Si aprovados' : status === 'N' ? 'No aprovados' : `${u('emptyLabel')}`}`, 20, 75);
               if (graph3) {
-                doc.text(`${u('country')}: ${countryToRender? countryToRender : `${u('emptyLabel')}`}`, 20, 60);
+                doc.text(`${u('country')}: ${countryToRender? countryToRender : `${u('emptyLabel')}`}`, 20, 80);
                 
               }
-              doc.text(`${u('totalStudentsLabel')}${totalStudents}`, 10, 70);
+              doc.text(`${u('totalStudentsLabel')}${totalStudents}`, 10, 90);
+              let yPosition = addImageToPDF(canvas1, 110, false);
+            
+              yPosition += 10;
+              doc.text(`${u('graph1Label')}`, doc.internal.pageSize.getWidth() / 2, yPosition, { align: `center` });
+              yPosition += 10;
+              doc.text(`${u('mostyear')} ${betterYear}`, 10, yPosition);
+              yPosition += 5;
+              doc.text(`${u('lessyear')} ${worstYear}`, 10, yPosition);
+
+              //year graph
+
+              doc.addPage();
+              addHeaderAndFooter(2);
+              // gender graph
               yPosition = addImageToPDF(canvas2, 80, false);
               yPosition += 10;
               doc.text(`${u('graph2Label')}`, doc.internal.pageSize.getWidth() / 2, yPosition, { align: `center` });
     
               
     
-              
+              //country graph
     
               if (graph3) {
                 html2canvas(graph3).then(canvas3 => {

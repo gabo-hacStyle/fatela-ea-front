@@ -18,7 +18,7 @@ import {
   import TableContent from "@/components/analysis/TableContent";
 import { getCookie } from "@/utils/cookiesManager";
 import { User } from "@/index";
-import { handleGetQuantityInfo, handleGetStudentsByYear } from "@/actions/gradesActions";
+import { handleGetQuantityInfo } from "@/actions/gradesActions";
 import ClientStateSetter from "@/components/hidden/ClientStateSetter";
 
 import InfoCards from "@/components/analysis/InfoCards";
@@ -38,7 +38,7 @@ const page = async () => {
   const country = userJson.country.countryId;
 
   await handleGetQuantityInfo(null, 'coord', country);
-  await handleGetStudentsByYear(country)
+ 
     
     return (
     <div>
@@ -75,17 +75,18 @@ const page = async () => {
             </CardContent>
           </Card>
 
-          <Card>
+          {/* <Card>
             <CardHeader>
              
-                {/* {t("coursesTotal")} {'('} {t("timeDefault")} {')'} */}
+                {/* {t("coursesTotal")} {'('} {t("timeDefault")} {')'} 
                 <CardTitle>{t("coursesTotal")} {'('} {t("timeDefault")} {')'}</CardTitle>
                
             </CardHeader>
             <CardContent>
               <InfoCards type={"courses"} />
             </CardContent>
-          </Card>
+          </Card> */}
+          
         </section>
         
           <section className="grid lg:grid-cols-2 gap-5">

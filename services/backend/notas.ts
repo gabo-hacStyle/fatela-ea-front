@@ -32,9 +32,10 @@ export const getQuantityInfo = async(token: string, query: string ) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            cache: 'force-cache'
+            cache: 'default'
         });
         const data = await response.json();
+        console.log('data de quaintities:',data)
         return data as QuantityInfo;
     } catch (error) {
         throw new Error(`Failed to get notes: ${error}`);
@@ -77,22 +78,22 @@ export const getNotesByCountry = async(token: string, countryId: number) => {
     }
 }
 
-export const getStudentsByYear = async(token: string, countryId: number | null) => {
-    try {
-        console.log('Llegando aca')
-        const queery = countryId ? `?countryId=${countryId}` : '';
-        const response = await fetch(`${BASE_GRADES}/studentsByTime${queery}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            cache: 'default'
-        });
-        const data = await response.json();
+// export const getStudentsByYear = async(token: string, countryId: number | null) => {
+//     try {
+//         console.log('Llegando aca')
+//         const queery = countryId ? `?countryId=${countryId}` : '';
+//         const response = await fetch(`${BASE_GRADES}/studentsByTime${queery}`, {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${token}`
+//             },
+//             cache: 'default'
+//         });
+//         const data = await response.json();
         
-        return data as StudentsByYearResponse[];
-    } catch (error) {
-        throw new Error(`Failed to get notes: ${error}`);
-    }
-}
+//         return data as StudentsByYearResponse[];
+//     } catch (error) {
+//         throw new Error(`Failed to get notes: ${error}`);
+//     }
+// }

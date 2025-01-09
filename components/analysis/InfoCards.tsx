@@ -42,11 +42,11 @@ const InfoCards = ({type}: InfoCardsProps) => {
             setData(response.totalStudents);
             setTotalStudents(response.totalStudents)
             break;
-          case 'courses':
+          // case 'courses':
             
-              setData(response.totalCourses)
+          //     setData(response.totalCourses)
             
-            break;
+          //   break;
           default:
             break;
         }

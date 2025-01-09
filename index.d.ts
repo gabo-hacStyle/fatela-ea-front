@@ -114,16 +114,16 @@ export type StudentsCountByConutry = {
     count: number;
     country: string;
 }
-
-export type QuantityInfo = {
-    totalStudents: number;
-    totalCourses: number;
-    totalFemales: number;
-    totalMales: number;
-    studentsByCountry: StudentsCountByConutry[]
-}
-
 export type StudentsByYearResponse = {
     count: number;
     year: number;
 }
+
+export type QuantityInfo = {
+    totalStudents: number;
+    totalFemales: number;
+    totalMales: number;
+    studentsByCountry: StudentsCountByConutry[]
+    studentsByYear: StudentsByYearResponse[]
+}
+

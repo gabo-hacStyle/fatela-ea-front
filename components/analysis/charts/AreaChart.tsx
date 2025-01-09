@@ -20,11 +20,12 @@ import {
 } from "@/components/ui/chart"
 import { useUpdateInfo } from "@/hooks/useUpdateInfo"
 import { useEffect, useState } from "react"
-import { handleGetStudentsByYear } from "@/actions/gradesActions"
+// import { handleGetStudentsByYear } from "@/actions/gradesActions"
 import PieGraph from "@/components/shared/skeletons/PieGraph"
 import { StudentsByYearResponse } from "@/index"
 import { useTranslations } from "next-intl"
 import { useGraficoReferenced } from "@/hooks/useReportes"
+import { handleGetQuantityInfo } from "@/actions/gradesActions"
 
 
 
@@ -45,29 +46,30 @@ export function AreaChartComponent() {
         
       } satisfies ChartConfig
 
-    const { mode, countryId } = useUpdateInfo();
+    const { query, mode, countryId } = useUpdateInfo();
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(false);
+
 
     useEffect(() => {
         
         setLoading(true);
         const responseData = async () => {
           
-          const response = await handleGetStudentsByYear(countryId);
+          const response = await handleGetQuantityInfo(query, mode, countryId);
           if(response) {
-            setData(response.map((item: StudentsByYearResponse) => {
+            setData(response.studentsByYear.map((item: StudentsByYearResponse) => {
                 return {
                     year: String(item.year),
                     num: item.count
                 }
             }));
 
-            const bestYear = response.reduce((prev: StudentsByYearResponse, current: StudentsByYearResponse) => {
+            const bestYear = response.studentsByYear.reduce((prev: StudentsByYearResponse, current: StudentsByYearResponse) => {
                 return (prev.count > current.count) ? prev : current
             })
             setBetterYear(bestYear.year);
-            const worstYear = response.reduce((prev: StudentsByYearResponse, current: StudentsByYearResponse) => {
+            const worstYear = response.studentsByYear.reduce((prev: StudentsByYearResponse, current: StudentsByYearResponse) => {
                 return (prev.count < current.count) ? prev : current
             })
             setWorstYear(worstYear.year);
@@ -78,7 +80,7 @@ export function AreaChartComponent() {
           responseData();
         }, 300)
         // responseData();
-      }, [ mode, countryId]);
+      }, [ mode, countryId, query]);
       // console.log('data en el area chart', data);
   return (
     <Card>
