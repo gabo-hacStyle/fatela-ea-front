@@ -1,3 +1,10 @@
+export type PagesInfo = {
+    size: number,
+        number: number;
+        totalElements: number;
+        totalPages: number;
+}
+
 export type LoginBody = {
     email: string;
     password: string;
@@ -125,5 +132,16 @@ export type QuantityInfo = {
     totalMales: number;
     studentsByCountry: StudentsCountByConutry[]
     studentsByYear: StudentsByYearResponse[]
+}
+
+//-----Cursos -------
+export type MenuCourseResponse = {
+    content: MenuCourse[];
+    page: PagesInfo;
+}
+
+export type MenuCourse = {
+    courseCode: string;
+    courseName: string;
 }
 

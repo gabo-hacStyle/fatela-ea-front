@@ -35,7 +35,7 @@ export const getQuantityInfo = async(token: string, query: string ) => {
             cache: 'default'
         });
         const data = await response.json();
-        console.log('data de quaintities:',data)
+        // console.log('data de quaintities:',data)
         return data as QuantityInfo;
     } catch (error) {
         throw new Error(`Failed to get notes: ${error}`);

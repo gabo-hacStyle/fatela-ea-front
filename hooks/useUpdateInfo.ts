@@ -65,3 +65,5 @@ export const useUpdateInfo = create<UpdateInfoType>((set) => ({
         year: number;
     }) => set({yearSelected}),
 }));
+
+

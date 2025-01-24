@@ -42,6 +42,7 @@ import TableContent from "@/components/analysis/TableContent";
 import ClientStateSetter from "@/components/hidden/ClientStateSetter";
 import { AreaChartComponent } from "@/components/analysis/charts/AreaChart";
 import GeneratePDF from "@/components/reportes/GeneratePDF";
+import CoursesList from "@/components/courses/CoursesList";
 
 
 const page = async () => {
@@ -66,23 +67,7 @@ const page = async () => {
 
       <LogoutButton position="sidebar" /> */}
       <ClientStateSetter  mode="staff" countryId={null}/>
-
-
       <section
-        id="filtros"
-        className="  p-6 mx-auto my-9 shadow-xl"
-      >
-        {/* <h2 className="text-xl font-semibold rounded-md text-center w-1/4 bg-primary  text-white py-1  ">{t("filtersTitle")}</h2> */}
-
-        <FiltersForm view="staff" />
-      </section>
-
-      <section className="grid gap-5" id="analysis">
-        <h1 className="text-center text-2xl my-8">
-          {t('headingAnalisys')}
-        </h1>
-        <GeneratePDF  countriesList={countriesList}/>
-        <section
           className="grid md:grid-cols-2  gap-5"
           id="numbersPart"
         >
@@ -95,17 +80,34 @@ const page = async () => {
             </CardContent>
           </Card>
 
-          {/* <Card>
+          <Card>
             <CardHeader>
               <CardTitle>{t("coursesTotal")} {'('} {t("timeDefault")} {')'}</CardTitle>
             </CardHeader>
-            {/* <CardContent>
+            <CardContent>
               <InfoCards type={"courses"} />
             </CardContent> 
-          </Card> */}
+          </Card>
         </section>
+
+
+      <section
+        id="filtros"
+        className="  p-6 mx-auto my-9 shadow-xl"
+      >
+        {/* <h2 className="text-xl font-semibold rounded-md text-center w-1/4 bg-primary  text-white py-1  ">{t("filtersTitle")}</h2> */}
+
+        <FiltersForm view="staff" category={'courses'}/>
+      </section>
+
+      <section className="grid gap-5" id="analysis">
+        <h1 className="text-center text-2xl my-8">
+          {t('headingAnalisys')}
+        </h1>
+        <GeneratePDF  countriesList={countriesList}/>
         
-          <section className="grid gap-5" >
+        
+          {/* <section className="grid gap-5" >
             <div>
               <AreaChartComponent />
             </div>
@@ -113,6 +115,20 @@ const page = async () => {
             <PieFull type={"genders"} />
             <HorizontalBars />
             </div>
+            
+            
+          </section> */}
+
+
+          <section className="grid gap-5" >
+            {/* <div>
+              <AreaChartComponent />
+            </div>
+            <div className="grid lg:grid-cols-2 gap-5">
+            <PieFull type={"genders"} />
+            <HorizontalBars />
+            </div> */}
+            <CoursesList />
             
             
           </section>

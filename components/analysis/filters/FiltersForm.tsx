@@ -33,7 +33,9 @@ import SelectItems from './SelectItems';
 // import SelectItemsPaginated from './SelectItemsPaginated';
 import CheckboxItems from './CheckboxItems';
 import { useUpdateInfo } from '@/hooks/useUpdateInfo';
+import { useUpdateYearCourses } from '@/hooks/useCourses';
 import { useGraficoReferenced } from '@/hooks/useReportes';
+
 
 const filtersFormSchema = z.object({
     program: z.string().optional(),
@@ -48,10 +50,12 @@ const filtersFormSchema = z.object({
 
 interface Props {
     view:   'staff' | 'coord';
+    category: 'students' | 'courses' | null;
 }
-const FiltersForm = ({view}: Props) => {
+const FiltersForm = ({view, category}: Props) => {
     const t = useTranslations('staffPage');
-    const { setQuery, setYearSelected } = useUpdateInfo();
+    const { setQuery } = useUpdateInfo();
+    const {setYear: setYearCourses} = useUpdateYearCourses();
     const { 
         setProgram, setCountry, setYear, setStatus, setGender
     }  = useGraficoReferenced();
@@ -78,18 +82,28 @@ const FiltersForm = ({view}: Props) => {
         setYear(data.year? Number(data.year) : null);
         setStatus(data.approved? data.approved : null);
         setGender(data.gender? data.gender : null);
-        
-        const filteredData = Object.entries(data).filter(
-            ([key, value]) => value !== undefined && value !== ''
-          );
-      
-          // Construir la query de tipo URL
-          const queryParams = new URLSearchParams(filteredData as [string, string][]).toString();
-          const queryUrl = `${queryParams}`;
-      
-          console.log(queryUrl);
 
-        setQuery(queryUrl);
+        switch (category) {
+            case 'students': {
+                const filteredData = Object.entries(data).filter(
+                    ([key, value]) => value !== undefined && value !== ''
+                  );
+              
+                  // Construir la query de tipo URL
+                  const queryParams = new URLSearchParams(filteredData as [string, string][]).toString();
+                  const queryUrl = `${queryParams}`;
+              
+                  console.log(queryUrl);
+        
+                setQuery(queryUrl);
+            }
+            break;
+            case 'courses': {
+                setYearCourses(data.year? Number(data.year) : null);
+            }
+
+        }        
+        
 
     }
 
@@ -111,8 +125,51 @@ const FiltersForm = ({view}: Props) => {
             }>
                 Limpiar filtros
             </Button> */}
+        
+
+              
+
             <form action="" onSubmit={form.handleSubmit(onSubmit)}>
-                <div className="grid md:grid-cols-2 gap-4 mb-4 text-black">
+                <div className="grid md:grid-cols-2 gap-4 mb-4 text-black"> 
+
+                <FormField
+                            control={form.control}
+                            name='year'
+                            render={({ field }) => (
+                                <FormItem className="w-full mt-6" >
+                                    <FormLabel>
+                                        {t('year')}
+
+                                    </FormLabel>
+                                    <FormControl>
+                                        
+                                        <SelectItems field={field} type='year'/>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    
+                    {
+                        category === 'students' && (
+                        <>
+                        
+                        <FormField
+                        control={form.control}
+                            name="course"
+                            render={({ field }) => (
+                                <FormItem className="w-full mt-6">
+                                    <FormLabel>
+                                        {t('course')}
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                    />
+
                         <FormField
                             control={form.control}
                             name='program'
@@ -153,40 +210,7 @@ const FiltersForm = ({view}: Props) => {
                             ): null
                         }
                     
-                    {/* <FormField
-                            control={form.control}
-                            name='course'
-                            render={({ field }) => (
-                                <FormItem className="w-full mt-6" >
-                                    <FormLabel>
-                                        {t('emailLabel')}
-
-                                    </FormLabel>
-                                    <FormControl>
-                                        
-                                        <SelectItemsPaginated field={field} type='courses'/>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        /> */}
-                        <FormField
-                            control={form.control}
-                            name='year'
-                            render={({ field }) => (
-                                <FormItem className="w-full mt-6" >
-                                    <FormLabel>
-                                        {t('year')}
-
-                                    </FormLabel>
-                                    <FormControl>
-                                        
-                                        <SelectItems field={field} type='year'/>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                       
                         {view === 'staff' && (<div className='hidden md:block'></div>)}
                         
                         <FormField 
@@ -209,6 +233,10 @@ const FiltersForm = ({view}: Props) => {
                                 </>   
                             )}
                         />
+                        </>
+                        )
+                    }
+                    
                 </div>
                             <div className='flex md:justify-end '> 
                             <Button type='submit'>
