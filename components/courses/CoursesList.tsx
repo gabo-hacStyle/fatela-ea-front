@@ -40,7 +40,7 @@ const CoursesList =  () => {
   return (
       <div className="w-full p-4  rounded-lg shadow-md">
       {coursesListPaginated && coursesListPaginated.map((course: MenuCourse) => (
-        <p className=' p-4 border-b border-gray-400'>{course.courseCode} - {course.courseName}</p>
+        <p key={course.courseCode} className=' p-4 border-b border-gray-400'>{course.courseCode} - {course.courseName}</p>
       ))}
       {
         loading && (
