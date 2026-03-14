@@ -8,6 +8,7 @@ import { handleGetQuantityInfo } from '@/actions/gradesActions';
 import { useTranslations } from "next-intl";
 import InfoCardsSkeleton from '../shared/skeletons/InfoCardsSkeleton';
 
+import { useUpdateCourseListNumber } from '@/hooks/useCourses';
 
 
 interface InfoCardsProps {
@@ -19,6 +20,7 @@ interface InfoCardsProps {
 const InfoCards = ({type}: InfoCardsProps) => {
   const t = useTranslations('staffPage');
   const {query, mode, countryId, yearSelected} = useUpdateInfo();
+  const { totalCourses } = useUpdateCourseListNumber();
   const {setTotalStudents} = useGraficoReferenced();
   const [data, setData] = useState<any>(null);
   const [periodo, setPeriodo] = useState<number>();
@@ -30,27 +32,16 @@ const InfoCards = ({type}: InfoCardsProps) => {
     // console.log('Este es el numero de cursos en el estado global', coursesInProgram.total)
     setLoading(true)
     const responseData = async () => {
-      console.log('mode en el cliente', mode)
-      console.log('countryId en el cliente', countryId)
+      
       const response = await handleGetQuantityInfo(query, mode, countryId);
       if(response) {
         if(yearSelected.selected){
           setPeriodo(yearSelected.year);
         }
-        switch (type) {
-          case 'students':
+   
             setData(response.totalStudents);
             setTotalStudents(response.totalStudents)
-            break;
-          // case 'courses':
-            
-          //     setData(response.totalCourses)
-            
-          //   break;
-          default:
-            break;
-        }
-        
+     
       }
       setLoading(false);
     }
@@ -61,17 +52,26 @@ const InfoCards = ({type}: InfoCardsProps) => {
 
   }, [query, mode, countryId])
 
-  
+  useEffect(() => {
+    if(type === 'courses') {
+      if(totalCourses != null) {
+        setData(totalCourses);
+        if(yearSelected.selected){
+          setPeriodo(yearSelected.year);
+        }
+      }
+    }
+  }, [type, totalCourses])
 
   return (
     <>
     {
-      type === 'students' && (
+      
       <h2 className='text-muted-foreground'>
 
       {t('timeTextDefault')} {`${periodo != null ? periodo : t('timeDefault')}`}
       </h2>
-      )
+      
     }
     {loading && (<InfoCardsSkeleton />)}
     <p>

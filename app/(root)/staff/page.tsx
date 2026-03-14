@@ -1,14 +1,7 @@
 import React from "react";
 import PieComponent from "@/components/analysis/charts/PieComponent";
 import { getCookie } from "@/utils/cookiesManager";
-import {
-  getPrograms,
-  getCourses,
-  getStudents,
-} from "@/services/backend/catalogs";
-import { Badge } from "@/components/ui/badge";
-import SelectItemsPaginated from "@/components/analysis/filters/SelectItemsPaginated";
-import LogoutButton from "@/components/shared/LogoutButton";
+import Link from 'next/link'
 
 import {
   Card,
@@ -74,10 +67,11 @@ const page = async () => {
       >
         {/* <h2 className="text-xl font-semibold rounded-md text-center w-1/4 bg-primary  text-white py-1  ">{t("filtersTitle")}</h2> */}
 
-        <FiltersForm view="staff" />
+        <FiltersForm view="staff" category={"students"} />
       </section>
 
       <section className="grid gap-5" id="analysis">
+        <Link href={'/staff/courses'}> Ir a analisis de cursos</Link>
         <h1 className="text-center text-2xl my-8">
           {t('headingAnalisys')}
         </h1>

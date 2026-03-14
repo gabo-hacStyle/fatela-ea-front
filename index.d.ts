@@ -127,3 +127,23 @@ export type QuantityInfo = {
     studentsByYear: StudentsByYearResponse[]
 }
 
+//-----Cursos -------
+export type MenuCourseResponse = {
+    content: MenuCourse[];
+    page: PagesInfo;
+}
+
+export type MenuCourse = {
+    courseCode: string;
+    courseName: string;
+    courseTeacher: string;
+    courseProgram: string;
+}
+export type CoursesByYear = {
+    program: string;
+    courses: {
+        courseCode: string;
+        courseName: string;
+        courseTeacher: string;
+    }[];
+}

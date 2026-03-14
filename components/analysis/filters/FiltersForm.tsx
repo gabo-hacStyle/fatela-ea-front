@@ -21,11 +21,10 @@ import {
 //UI needed
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-// import Loading from "./Loading"
+
 
 import { defaultValuesFilters} from '@/utils/index';
-// import { useRouter } from 'next/navigation';
-// import { postLogin } from '@/services/backend/auth';
+
 
 //Actions
 import {handleGetQuantityInfo} from '@/actions/gradesActions'
@@ -34,6 +33,7 @@ import SelectItems from './SelectItems';
 import CheckboxItems from './CheckboxItems';
 import { useUpdateInfo } from '@/hooks/useUpdateInfo';
 import { useGraficoReferenced } from '@/hooks/useReportes';
+import { useUpdateYearCourses } from '@/hooks/useCourses';
 
 const filtersFormSchema = z.object({
     program: z.string().optional(),
@@ -48,28 +48,26 @@ const filtersFormSchema = z.object({
 
 interface Props {
     view:   'staff' | 'coord';
+    category: 'students' | 'courses' | null;
 }
-const FiltersForm = ({view}: Props) => {
+const FiltersForm = ({view, category}: Props) => {
     const t = useTranslations('staffPage');
     const { setQuery, setYearSelected } = useUpdateInfo();
     const { 
         setProgram, setCountry, setYear, setStatus, setGender
     }  = useGraficoReferenced();
-
+    const {setYear: setYearCourses} = useUpdateYearCourses();
     useEffect(() => {
         setQuery('');
     }, [])
-    // const t = useTranslations('staffPage');
+    
 
     //Defining the form
     const form = useForm<z.infer<typeof filtersFormSchema>>({
         resolver: zodResolver(filtersFormSchema),
         defaultValues: defaultValuesFilters,
     })
-    // const [error, setErrorForm] = useState('')
-    // const [disabled, setDisabled] = useState(false);
-    // const [loading, setLoading] = useState(false);
-    // const [created, setCreated] = useState(false);
+    
 
     async function onSubmit(data: z.infer<typeof filtersFormSchema>) {
         console.log(data)
@@ -78,42 +76,60 @@ const FiltersForm = ({view}: Props) => {
         setYear(data.year? Number(data.year) : null);
         setStatus(data.approved? data.approved : null);
         setGender(data.gender? data.gender : null);
-        
-        const filteredData = Object.entries(data).filter(
-            ([key, value]) => value !== undefined && value !== ''
-          );
-      
-          // Construir la query de tipo URL
-          const queryParams = new URLSearchParams(filteredData as [string, string][]).toString();
-          const queryUrl = `${queryParams}`;
-      
-          console.log(queryUrl);
 
-        setQuery(queryUrl);
+        switch (category) {
+            case 'students': {
+                const filteredData = Object.entries(data).filter(
+                    ([key, value]) => value !== undefined && value !== ''
+                  );
+              
+                  // Construir la query de tipo URL
+                  const queryParams = new URLSearchParams(filteredData as [string, string][]).toString();
+                  const queryUrl = `${queryParams}`;
+              
+                  
+        
+                setQuery(queryUrl);
+            }
+            break;
+            case 'courses': {
+                setYearSelected({selected: true, year: Number(data.year)})
+                setYearCourses(data.year? Number(data.year) : null);
+            }
+
+        }        
+        
 
     }
 
-    // const { reset } = useForm({ 
-
-    //     defaultValues: filtersFormSchema.parse({}), 
-
-    // });
-
+    
     return (
         <Form {...form}>
-            {/* <Button onClick={
-                () => {
-                    // form.reset(defaultValuesFilters);
-                    reset()
-                    setQuery('');
-                    setYearSelected({selected: false, year: 0});
-                }
-            }>
-                Limpiar filtros
-            </Button> */}
+            
             <form action="" onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="grid md:grid-cols-2 gap-4 mb-4 text-black">
-                        <FormField
+
+                    <FormField
+                            control={form.control}
+                            name='year'
+                            render={({ field }) => (
+                                <FormItem className="w-full mt-6" >
+                                    <FormLabel>
+                                        {t('year')}
+
+                                    </FormLabel>
+                                    <FormControl>
+                                        
+                                        <SelectItems field={field} type='year'/>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        
+                        {category === 'students' && (
+                            <>
+                            <FormField
                             control={form.control}
                             name='program'
                             render={({ field }) => (
@@ -153,40 +169,8 @@ const FiltersForm = ({view}: Props) => {
                             ): null
                         }
                     
-                    {/* <FormField
-                            control={form.control}
-                            name='course'
-                            render={({ field }) => (
-                                <FormItem className="w-full mt-6" >
-                                    <FormLabel>
-                                        {t('emailLabel')}
-
-                                    </FormLabel>
-                                    <FormControl>
-                                        
-                                        <SelectItemsPaginated field={field} type='courses'/>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        /> */}
-                        <FormField
-                            control={form.control}
-                            name='year'
-                            render={({ field }) => (
-                                <FormItem className="w-full mt-6" >
-                                    <FormLabel>
-                                        {t('year')}
-
-                                    </FormLabel>
-                                    <FormControl>
-                                        
-                                        <SelectItems field={field} type='year'/>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                    
+                        
                         {view === 'staff' && (<div className='hidden md:block'></div>)}
                         
                         <FormField 
@@ -209,6 +193,11 @@ const FiltersForm = ({view}: Props) => {
                                 </>   
                             )}
                         />
+                            </>
+                        )
+                        }
+                     
+                        
                 </div>
                             <div className='flex md:justify-end '> 
                             <Button type='submit'>

@@ -4,7 +4,6 @@ import LogoutButton from '@/components/shared/LogoutButton'
 import React from 'react'
 import { getCookie } from '@/utils/cookiesManager'
 import { User } from '@/index';
-import {Badge} from '@/components/ui/badge'
 import { getTranslations } from 'next-intl/server';
 import { headers } from 'next/headers';
 
@@ -33,19 +32,18 @@ const layout = async({children}: Readonly<{children: React.ReactNode}>) => {
           {/* </Badge> */}
           <div className="flex items-center justify-between">
             <h1 className="text-4xl text-left font-semibold">
-                  {/*Condicionando texto*/ }
+                  
                   {
-                  // rolesList.includes('ADMIN') ? 
-                  // t('admin') 
+                  
                   pathname === '/admin' ?
                   `${t('adminTitle')} `
                   : 
-                  // rolesList.includes('STAFF') ? 
-                  pathname === '/staff' ?
-                  // t('coordinator') 
+                  
+                  (pathname === '/staff/' || pathname === '/staff/courses') ?
+                  
                   `${t('staffTitle')} `
                   : 
-                  // t('staff')
+                  
                   `${t('cordTitle')} ${country}`
                   }
               

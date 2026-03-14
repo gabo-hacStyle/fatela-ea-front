@@ -51,7 +51,7 @@ const page = async () => {
       >
         
 
-        <FiltersForm view="coord" />
+        <FiltersForm view="coord"  category="students"/>
       </section>
 
       <section className="grid gap-5" id="analysis">
